@@ -2,7 +2,7 @@ class CompaniesController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-  	@company = Company.last
+  	@company = Company.all
   end
 
   def new

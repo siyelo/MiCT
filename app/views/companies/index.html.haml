@@ -7,7 +7,8 @@
   // When the user clicks the marker, an info window opens.
   
   function initialize() {
-    var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
+    var myLatlng = new google.maps.LatLng(#{@company.first.latitude},#{@company.first.longitude});
+    var myLatlng2 = new google.maps.LatLng(#{@company.second.latitude},#{@company.second.longitude});
     var mapOptions = {
       zoom: 4,
       center: myLatlng
@@ -45,11 +46,19 @@
         map: map,
         title: 'Uluru (Ayers Rock)'
     });
+    var marker2 = new google.maps.Marker({
+        position: myLatlng2,
+        map: map,
+        title: 'Uluru (Ayers Rock)'
+    });
     google.maps.event.addListener(marker, 'click', function() {
       infowindow.open(map,marker);
+    });
+    google.maps.event.addListener(marker2, 'click', function() {
+      infowindow.open(map,marker2);
     });
   }
   
   google.maps.event.addDomListener(window, 'load', initialize);
-  
+
 #map-canvas
