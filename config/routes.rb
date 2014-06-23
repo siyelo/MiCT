@@ -8,7 +8,6 @@ Rails.application.routes.draw do
 
   get 'companies/destroy'
 
-  devise_for :users
   # IF AUTHENTICATE USER IS REQUIRED
   # devise_scope :user do
   #   authenticated :user do
@@ -19,7 +18,10 @@ Rails.application.routes.draw do
   #   end
   # end
 
-  resources :companies, only: [:create, :edit, :update, :destroy]
+  devise_for :users
+
+  resources :companies, only: [:new, :create, :edit, :update, :destroy]
+
   # root '/companies' => 'companies#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
