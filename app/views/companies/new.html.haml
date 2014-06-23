@@ -1,0 +1,10 @@
+= form_for Company.new, {action: companies_path, method: 'post'} do |f|
+	= f.label :name, caption: "Name: "
+	= f.text_field :name
+	= f.label :size, caption: "Size: "
+	= f.number_field :size
+	= f.label :status, caption: "Status: "
+	= f.radio_button :status, value: "Hiring"
+	= f.radio_button :status, value: "Seeking funding"
+	= f.text_field :location
+	= f.submit "Create"
