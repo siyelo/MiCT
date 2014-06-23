@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get 'companies/create'
 
   get 'companies/edit'
@@ -8,7 +9,15 @@ Rails.application.routes.draw do
   get 'companies/destroy'
 
   devise_for :users
-
+  # IF AUTHENTICATE USER IS REQUIRED
+  # devise_scope :user do
+  #   authenticated :user do
+  #     root :to => 'user#index', as: :authenticated_root
+  #   end
+  #   unauthenticated :user do
+  #     root :to => 'devise/registrations#new', as: :unauthenticated_root
+  #   end
+  # end
 
   resources :companies, only: [:create, :edit, :update, :destroy]
   # root '/companies' => 'companies#index'
