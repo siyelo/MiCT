@@ -7,8 +7,8 @@
   // When the user clicks the marker, an info window opens.
   
   function initialize() {
-    var myLatlng = new google.maps.LatLng(#{@company.first.latitude},#{@company.first.longitude});
-    var myLatlng2 = new google.maps.LatLng(#{@company.second.latitude},#{@company.second.longitude});
+    var myLatlng = new google.maps.LatLng(#{@companies.first.latitude},#{@companies.first.longitude});
+    var myLatlng2 = new google.maps.LatLng(#{@companies.second.latitude},#{@companies.second.longitude});
     var mapOptions = {
       zoom: 4,
       center: myLatlng
