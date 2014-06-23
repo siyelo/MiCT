@@ -7,7 +7,7 @@ class CompaniesController < ApplicationController
   end
 
   def create
-  	@company = Company.create(company_params)
+  	@company = Company.create!(company_params)
   end
 
   def edit
@@ -21,7 +21,7 @@ class CompaniesController < ApplicationController
 
   private
   def company_params
-    params.require(:company).permit(:name, :size, :location, :status)
+    params.require(:company).permit(:name, :size, :location, :status, :latitude, :longitude)
   end
 
 end
