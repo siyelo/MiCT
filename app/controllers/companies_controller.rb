@@ -7,6 +7,8 @@ class CompaniesController < ApplicationController
 
   def create
   	@company = Company.create(company_params)
+  	flash[:success] = "Company successfully created."
+  	redirect_to root_path
   end
 
   def edit
