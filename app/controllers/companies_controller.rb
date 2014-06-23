@@ -1,8 +1,10 @@
 class CompaniesController < ApplicationController
   before_filter :authenticate_user!
 
-  def new
+  def index
+  end
 
+  def new
   end
 
   def create
