@@ -20,9 +20,10 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :companies, only: [:new, :create, :edit, :update, :destroy]
+  resources :companies, only: [:index, :new, :create, :edit, :update, :destroy]
 
-  # root '/companies' => 'companies#index'
+  root 'companies#index'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

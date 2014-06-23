@@ -1,4 +1,5 @@
 class CompaniesController < ApplicationController
+  before_filter :authenticate_user!
 
   def index
   end
@@ -7,7 +8,11 @@ class CompaniesController < ApplicationController
   end
 
   def create
+
   	@company = Company.create!(company_params)
+
+  	flash[:success] = "Company successfully created."
+  	redirect_to root_path
   end
 
   def edit
