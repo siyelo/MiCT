@@ -5,11 +5,14 @@ class CompaniesController < ApplicationController
   	@companies = Company.all
   end
 
+  def show
+    @company = Company.find(params[:id])
+  end
+
   def new
   end
 
   def create
-
   	@company = Company.create(company_params)
 
   	flash[:success] = "Company successfully created."

@@ -2,12 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+/* index */
 .index-col {
 	float: left;
 	width: 50%;
 }
 
-li {
+.result {
 	height: 50px;
 	list-style: none;
 
@@ -23,3 +25,49 @@ li {
 		padding-left: 10px
 	}
 }
+
+/* show */
+.info {
+	text-align: center;
+}
+
+.header {
+	padding: 20px;
+
+	.description {
+		padding: 0 20%;
+	}
+
+	hr {
+		margin-top: 30px
+	}
+}
+
+.map-images {
+	position: absolute;
+	top: 460px;
+	left: 58%;
+
+	img {
+		width: 200px;
+		height: 150px;
+	}
+}
+
+
+.basic-info {
+	height: 100px;
+
+	li {
+		list-style: none;
+		float: left;
+		width: 200px;
+		height: 100%;
+		text-align: center
+	}
+
+	hr {
+		clear: both;
+	}
+}
+
