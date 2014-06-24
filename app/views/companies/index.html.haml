@@ -1,9 +1,27 @@
-.notice= flash[:success]
+%html
+    %head
+    %body
+        .notice= flash[:success]
 
-%a{href: new_company_path} New Company
+        %a{href: new_company_path} New Company
+        %br
 
-%br
-%br
+        .index-col
+            %ul.results
+            - @companies.each do |co|
+                %li.result
+                    .result-photo
+                        %img.logo{src: co.avatar.url}
+                    .result-info
+                        #{co.name}
+                        = co.status == nil ? "" : "(#{co.status})"
+                        = link_to "View", co
+                        %br
+                        #{co.size} people
 
-- @companies.each do |co|
-    %p.company #{co.name} #{co.size}
+        .index-col
+            %p map is here
+
+
+
+

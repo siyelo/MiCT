@@ -1,15 +1,18 @@
 = form_for Company.new, {action: companies_path, method: 'post', name: "form1"} do |f|
-	= f.label :name, caption: "Name: "
-	= f.text_field :name
-	= f.label :size, caption: "Size: "
-	= f.number_field :size
-	= f.label :status, caption: "Status: "
-	= f.radio_button :status, value: "Hiring"
-	= f.radio_button :status, value: "Seeking funding"
+	= f.label(:name, "Name: ")
+	= f.text_field(:name)
+	= f.label(:size, "Size: ")
+	= f.number_field(:size)
+	= f.label(:avatar, "Upload Logo: ")
+	= f.file_field(:avatar)
+	= f.label(:status, "Hiring")
+	= f.radio_button(:status, "Hiring")
+	= f.label(:status, "Seeking funding")
+	= f.radio_button(:status, "Seeking funding")
 	%input#location.textbox{name: "company[location]", type: "text-field", value: ""}/
 	= f.hidden_field :latitude
 	= f.hidden_field :longitude
-	= f.submit "Create"
+	= f.submit("Create")
 
 
 
