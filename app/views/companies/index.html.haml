@@ -1,20 +1,28 @@
 .notice= flash[:success]
 
 %a{href: new_company_path} New Company
-
 %br
 
-%ol
+.index-col
+	%ul.results
 	- @companies.each do |co|
-		%li
-			%a{:href => "javascript:void(0)", :onclick => "new google.maps.event.trigger(marker#{co.id}, 'click');"} #{co.name}
+		%li.result
+			.result-photo
+				%img.logo{src: co.avatar.url}
+			.result-info
+				%a{:href => "javascript:void(0)", :onclick => "new google.maps.event.trigger(marker#{co.id}, 'click');"} #{co.name}
+				= co.status == nil ? "" : "(#{co.status})"
+				= link_to "View", co
+				%br
+				#{co.size} people
 
-#map-canvas
+#map-canvas.index-col
+
 
 :javascript
 	var myLatlng = new google.maps.LatLng(#{@companies.last.latitude},#{@companies.last.longitude});
 	var mapOptions = {
-	  zoom: 10,
+	  zoom: 13,
 	  center: myLatlng
 	};
 	var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -23,23 +31,24 @@
 - @companies.each do |co|
 	:javascript
 		function initialize() {
-		    var myLatlng#{co.id} = new google.maps.LatLng(#{co.latitude},#{co.longitude});
-		    
-		    var contentString = 
-		       '<h1 id="firstHeading" class="firstHeading">#{co.name}</h1>' + '<p>#{co.location}</p>';
+			var myLatlng#{co.id} = new google.maps.LatLng(#{co.latitude},#{co.longitude});
+			
+			var contentString = 
+			   '<h1 id="firstHeading" class="firstHeading">#{co.name}</h1>' + '<p>#{co.location}</p>';
 		  
-		    var infowindow = new google.maps.InfoWindow({
-		        content: contentString
-		    });
+			var infowindow = new google.maps.InfoWindow({
+				content: contentString
+			});
 		  
-		    window.marker#{co.id} = new google.maps.Marker({
-		        position: myLatlng#{co.id},
-		        map: map,
-		        title: '#{co.name}'
-		    });
-		    google.maps.event.addListener(marker#{co.id}, 'click', function() {
-		      infowindow.open(map,marker#{co.id});
-		    });
+			window.marker#{co.id} = new google.maps.Marker({
+				position: myLatlng#{co.id},
+				map: map,
+				title: '#{co.name}'
+			});
+			google.maps.event.addListener(marker#{co.id}, 'click', function() {
+			  infowindow.open(map,marker#{co.id});
+			});
 		  }
 		  
 		google.maps.event.addDomListener(window, 'load', initialize);
+

@@ -1,3 +1,25 @@
 // Place all the styles related to the Companies controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.index-col {
+	float: left;
+	width: 50%;
+}
+
+li {
+	height: 50px;
+	list-style: none;
+
+	.result-photo {
+		float: left;
+		.logo {
+			height: 40px;
+		}
+	}
+
+	.result-info {
+		float: left;
+		padding-left: 10px
+	}
+}

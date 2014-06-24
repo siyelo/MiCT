@@ -1,8 +1,17 @@
 source 'https://rubygems.org'
 
+# Geocoder gem for google maps
 gem 'geocoder'
+
+# Haml gem for writing HTML code
 gem 'haml'
+
+# Devise gem for User account & authentication
 gem 'devise'
+
+# Paperclip gem for managing file uploads
+gem 'paperclip'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 # Use sqlite3 as the database for Active Record
