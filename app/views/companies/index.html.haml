@@ -12,7 +12,7 @@
 			.result-info
 				%a{:href => "javascript:void(0)", :onclick => "new google.maps.event.trigger(marker#{co.id}, 'click');"} #{co.name}
 				= co.status == nil ? "" : "(#{co.status})"
-				= link_to "View", co
+				/ = link_to "View", co
 				%br
 				#{co.size} people
 

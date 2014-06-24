@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :companies, only: [:index, :new, :create, :edit, :update, :destroy]
+  resources :companies, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 
   root 'companies#index'
   
