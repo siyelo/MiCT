@@ -21,12 +21,54 @@
 @import partials/users
 
 
-html, body, #map-canvas
-	margin: 0
-	height: 100%
-	margin: 0px
-	padding: 0px
 
+.index-col
+	float: left
+	width: 50%
+
+.result
+	height: 50px
+	list-style: none
+	.result-photo
+		float: left
+		.logo
+		height: 40px
+	.result-info
+		float: left
+		padding-left: 10px
+
+
+.info
+	text-align: left
+	padding: 40px
+
+.header
+	padding: 20px
+	.description
+		padding: 0 30%
+	hr
+		margin-top: 30px
+
+.map-images
+	position: absolute
+	top: 460px
+	left: 58%
+	img
+		width: 200px
+		height: 150px
+
+.basic-info
+	height: 100px
+	li
+		list-style: none
+		float: left
+		width: 200px
+		height: 100%
+		text-align: center
+	hr
+		clear: both
+
+	
 .sign
 	width: 800px
 	margin: 200px auto
@@ -41,7 +83,7 @@ html, body, #map-canvas
 .info .item
 	display: block
 	border-bottom: 1px solid #eee
-	padding: 10px
+	padding: 30px
 	text-decoration: none
 	color: #000
 
@@ -54,4 +96,6 @@ html, body, #map-canvas
 
 .info .item:last-child
 	border-bottom: none
-	
+
+#map
+	height: 1000px
