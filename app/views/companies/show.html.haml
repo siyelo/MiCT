@@ -1,7 +1,16 @@
+.notice= flash[:success]
+
 :css
 	.header{background-image: url("")}
 
 %nav
+
+- if user_signed_in?
+	= link_to "Sign out", destroy_user_session_path, method: :delete
+	- if (current_user.id == @company.user.id)
+		= link_to "Edit Profile", edit_company_path
+- else
+	%a{href: new_user_session_path} Sign in
 
 .header.info
 	%h1= @company.name

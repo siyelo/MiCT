@@ -1,13 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'companies/create'
-
-  get 'companies/edit'
-
-  get 'companies/update'
-
-  get 'companies/destroy'
-
   # IF AUTHENTICATE USER IS REQUIRED
   # devise_scope :user do
   #   authenticated :user do

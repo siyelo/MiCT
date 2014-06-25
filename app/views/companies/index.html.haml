@@ -1,8 +1,9 @@
 .notice= flash[:success]
+.notice= flash[:error]
 
 %a{href: new_company_path} New Company
 - if user_signed_in?
-	%a{href: new_company_path, method: :delete} Sign out
+	= link_to "Sign out", destroy_user_session_path, method: :delete
 - else
 	%a{href: new_user_session_path} Sign in
 
