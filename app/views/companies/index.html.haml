@@ -1,64 +1,98 @@
-.notice= flash[:success]
-
-%a{href: new_company_path} New Company
-%br
+#info.info.index-col
+	.notice= flash[:success]
+	%a{href: new_company_path} New Company
+#map.map
 
 .index-col
-	%ul.results
-	- @companies.each do |co|
-		%li.result
-			.result-photo
-				%img.logo{src: co.avatar.url}
-			.result-info
-				%a{:href => "javascript:void(0)", :onclick => "new google.maps.event.trigger(marker#{co.id}, 'click');"} #{co.name}
-				= co.status == nil ? "" : "(#{co.status})"
-				= link_to "View", co, target: :blank
-				%br
-				#{co.location}
-
-#map-canvas.index-col
-
-
-:javascript
-	var myLatlng = new google.maps.LatLng(#{@companies.last.latitude},#{@companies.last.longitude});
-	var mapOptions = {
-	  zoom: 16,
-	  center: myLatlng
-	};
-	var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
-
-- @companies.each do |co|
 	:javascript
-		function initialize() {
-			var myLatlng#{co.id} = new google.maps.LatLng(#{co.latitude},#{co.longitude});
-			
-			var contentString = 
-			'<div class="marker-info-win">'+
-					'<div class="marker-inner-win" style="width:200px;"><span class="info-content">'+
-					'<h1 class="marker-heading">#{co.name}</h1>'+
-					'#{co.location}'+ 
-					'</span>'+
-					'</div></div>';
-		  
-			var infowindow = new google.maps.InfoWindow({
-				content: contentString
-			});
-		  
-			window.marker#{co.id} = new google.maps.Marker({
-				position: myLatlng#{co.id},
-				map: map,
-				title: '#{co.name}',
-				animation: google.maps.Animation.DROP
-			});
-			google.maps.event.addListener(marker#{co.id}, 'click', function() {
-				infowindow.open(map,marker#{co.id});
-				map.setZoom(17);
-				map.setCenter(marker#{co.id}.getPosition());
-			});
-			
-			
+		var map = L.mapbox.map('map', 'examples.h186knp8').setView([-33.93, 18.42], 15);
+
+		var myLayer = L.mapbox.featureLayer().addTo(map);
+
+		myLayer.setGeoJSON([{
+			  type: 'Feature',
+			  geometry: {
+				  type: 'Point',
+				  coordinates: [#{@companies.first.longitude}, #{@companies.first.latitude}]
+			  },
+			  properties: {
+				  title: '<img class="result logo" src="#{@companies.first.avatar.url}" style="float:right;"><h3>#{@companies.first.name}</h3>',
+				  description: '#{@companies.first.location}',
+				  'marker-id': 'marker-1',
+				  'marker-color': '#f86767'
+			  }
+		  },
+		  {
+			  type: 'Feature',
+			  geometry: {
+				  type: 'Point',
+				  coordinates: [#{@companies.second.longitude}, #{@companies.second.latitude}]
+			  },
+			  properties: {
+				  title: '<img class="result logo" src="#{@companies.second.avatar.url}" style="float:right;"><h3>#{@companies.second.name}</h3>',
+				  description: '#{@companies.second.location}',
+				  'marker-id': 'marker-1',
+				  'marker-color': '#f86767'
+			  }
+		  },
+		  {
+			  type: 'Feature',
+			  geometry: {
+				  type: 'Point',
+				  coordinates: [#{@companies.third.longitude}, #{@companies.third.latitude}]
+			  },
+			  properties: {
+				  title: '<img class="result logo" src="#{@companies.third.avatar.url}" style="float:right;"><h3>#{@companies.third.name}</h3>',
+				  description: '#{@companies.third.location}',
+				  'marker-id': 'marker-1',
+				  'marker-color': '#f86767'
+			  }
+		  },
+		  {
+			  type: 'Feature',
+			  geometry: {
+				  type: 'Point',
+				  coordinates: [#{@companies.fourth.longitude}, #{@companies.fourth.latitude}]
+			  },
+			  properties: {
+				  title: '<img class="result logo" src="#{@companies.fourth.avatar.url}" style="float:right;"><h3>#{@companies.fourth.name}</h3>',
+				  description: '#{@companies.fourth.location}',
+				  'marker-id': 'marker-1',
+				  'marker-color': '#f86767'
+			  }
+		  },
+		]);
+	  
+		var info = document.getElementById('info');
+
+		// Iterate through each feature layer item, build a
+		// marker menu item and enable a click event that pans to + opens
+		// a marker that's associated to the marker item.
+		myLayer.eachLayer(function(marker) {
+		var link = info.appendChild(document.createElement('a'));
+		link.className = 'item';
+		link.href = '#';
+
+		// Populate content from each markers object.
+		link.innerHTML = marker.feature.properties.title +
+		  '' + marker.feature.properties.description + '';
+		link.onclick = function() {
+		  if (/active/.test(this.className)) {
+			this.className = this.className.replace(/active/, '').replace(/\s\s*$/, '');
+		  } else {
+			var siblings = info.getElementsByTagName('a');
+			for (var i = 0; i < siblings.length; i++) {
+			  siblings[i].className = siblings[i].className
+				.replace(/active/, '').replace(/\s\s*$/, '');
+			};
+			this.className += ' active';
+
+			// When a menu item is clicked, animate the map to center
+			// its associated marker and open its popup.
+			map.panTo(marker.getLatLng());
+			marker.openPopup();
 		  }
-		  
-		google.maps.event.addDomListener(window, 'load', initialize);
+		  return false;
+		};
+		});
 
