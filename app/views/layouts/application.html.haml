@@ -1,0 +1,17 @@
+!!!
+%html
+  %head
+    %title Made in Cape Town
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    :css
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    %script{src: "https://maps.googleapis.com/maps/api/js?v=3.exp"}
+    %script{src: "https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places", type: "text/javascript"}
+  %body
+    = yield
