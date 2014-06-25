@@ -37,6 +37,10 @@
 		%a{href: "#map"} Location 
 		|
 		%a{href: "#about"} About
+		|
+		%a{href: "#tech"} Technologies
+		|
+		%a{href: "#similar"} Similar Companies
 
 #map
 	%iframe{frameborder: "0", height: "450", src: "https://www.google.com/maps/embed/v1/place?key=AIzaSyCh6MlmTqA9E2WD4Gt4AB6eIg_0N3fMvRw&q=#{@company.location.gsub(" ", "+")}", style: "border:0", width: "100%"}
@@ -55,3 +59,14 @@
 #about.info
 	%h1 About
 	%p
+
+#tech.info
+	%h1 Technologies
+	%p
+
+#similar.info
+	%h1 Similar Companies
+	%p
+
+
+
