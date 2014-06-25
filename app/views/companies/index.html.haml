@@ -1,3 +1,4 @@
+
 #info.info.index-col
 	.notice= flash[:success]
 	.notice= flash[:error]
@@ -8,10 +9,10 @@
 	- else
 		%a{href: new_user_session_path} Sign in
 
+
 #map.map
 	:javascript
 		var map = L.mapbox.map('map', 'examples.h186knp8').setView([-33.93, 18.42], 15);
-
 		var myLayer = L.mapbox.featureLayer().addTo(map);
 
 		myLayer.setGeoJSON([{
