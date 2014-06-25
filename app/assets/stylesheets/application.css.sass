@@ -10,9 +10,16 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
  *= require_self
  */
+
+@import compass/reset
+@import compass/utilities
+@import compass/css3
+
+@import partials/companies
+@import partials/users
+
 
 html, body, #map-canvas
 	margin: 0
@@ -47,4 +54,4 @@ html, body, #map-canvas
 
 .info .item:last-child
 	border-bottom: none
-
+	
