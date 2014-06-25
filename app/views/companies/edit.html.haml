@@ -1,2 +1,26 @@
-%h1 Companies#edit
-%p Find me in app/views/companies/edit.html.haml
+%h1 Edit company
+
+= render 'form'
+
+%hr
+
+= form_for @company do |f|
+	= f.label(:website, "Website: ")
+	= f.text_field(:website)
+	= f.label(:email, "Email: ")
+	= f.email_field(:email)
+	= f.label(:phone, "Phone: ")
+	= f.text_field(:phone)
+	= f.label(:hours, "Hours")
+	= f.text_field(:hours)
+	= f.submit("Save")
+
+%hr
+
+= form_for @company do |f|
+	= f.label(:technology, "Technologies: ")
+	= f.text_field(:technology)
+	= f.submit("Save")
+
+= link_to 'Back', @company
+
