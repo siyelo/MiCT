@@ -71,7 +71,9 @@
 
 #tech.info
 	%h1 Technologies
-	%p
+	%ul
+	- @company.technologies.each do |t|
+		%li #{t.name}
 
 #similar.info
 	%h1 Similar Companies
