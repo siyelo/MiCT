@@ -27,10 +27,12 @@ class CompaniesController < ApplicationController
 
   def edit
     @company = Company.find(params[:id])
+    @technology = Technology.all
   end
 
   def update
     @company = Company.find(params[:id])
+
     company_params.each {|attribute, value|
       company_params.delete(attribute) if company_params[:value] == ""
     }
@@ -41,6 +43,10 @@ class CompaniesController < ApplicationController
   end
 
   def destroy
+  end
+
+  def tech_tags
+    
   end
 
   private

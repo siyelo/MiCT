@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :companies, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  post 'companies/tech_tags' => 'companies#tech_tags'
 
   root 'companies#index'
   

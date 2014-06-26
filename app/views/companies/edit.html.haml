@@ -17,10 +17,9 @@
 
 %hr
 
-= form_for @company do |f|
-	= f.label(:technology, "Technologies: ")
-	= f.text_field(:technology)
-	= f.submit("Save")
+= form_tag(companies_tech_tags_path, :method=>'post') do
+	= select_tag("name", options_from_collection_for_select(@technology, "id", "name"), multiple: true)
+	= submit_tag "Save"
 
 = link_to 'Back', @company
 
