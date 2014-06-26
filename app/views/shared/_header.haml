@@ -1,0 +1,12 @@
+%header#header
+	%h1#logo
+		= link_to "Made in Cape Town", "/"
+	%nav#main-nav
+		%ul
+			%li
+				= link_to "New Company", new_company_path
+			%li
+				- if user_signed_in?
+					= link_to "Sign out", destroy_user_session_path, method: :delete
+				- else
+					%a{href: new_user_session_path} Sign in

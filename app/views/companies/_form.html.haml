@@ -1,18 +1,26 @@
 = form_for @company, {name: "form1"} do |f|
-	= f.label(:name, "Name: ")
-	= f.text_field(:name)
-	= f.label(:size, "Size: ")
-	= f.number_field(:size)
-	= f.label(:avatar, "Upload Logo: ")
-	= f.file_field(:avatar)
-	= f.label(:status, "Hiring")
-	= f.radio_button(:status, "Hiring")
-	= f.label(:status, "Seeking funding")
-	= f.radio_button(:status, "Seeking funding")
-	%input#location.textbox{name: "company[location]", type: "text-field", value: ""}/
-	= f.hidden_field :latitude
-	= f.hidden_field :longitude
-	= f.submit("Save")
+	%ul
+		%li
+			= f.label(:name, "Name: ")
+			= f.text_field(:name)
+		%li
+			= f.label(:size, "Size: ")
+			= f.number_field(:size)
+		%li
+			= f.label(:avatar, "Upload Logo: ")
+			= f.file_field(:avatar)
+		%li
+			= f.label(:status, "Hiring")
+			= f.radio_button(:status, "Hiring")
+		%li
+			= f.label(:status, "Seeking funding")
+			= f.radio_button(:status, "Seeking funding")
+		%li
+			%input#location.textbox{name: "company[location]", type: "text-field", value: ""}/
+			= f.hidden_field :latitude
+			= f.hidden_field :longitude
+		%li
+			= f.submit("Save")
 
 
 

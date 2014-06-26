@@ -2,20 +2,22 @@
 
 = render 'form'
 
-%hr
-
 = form_for @company do |f|
-	= f.label(:website, "Website: ")
-	= f.text_field(:website)
-	= f.label(:email, "Email: ")
-	= f.email_field(:email)
-	= f.label(:phone, "Phone: ")
-	= f.text_field(:phone)
-	= f.label(:hours, "Hours")
-	= f.text_field(:hours)
-	= f.submit("Save")
-
-%hr
+	%ul
+		%li
+			= f.label(:website, "Website: ")
+			= f.text_field(:website)
+		%li
+			= f.label(:email, "Email: ")
+			= f.email_field(:email)
+		%li
+			= f.label(:phone, "Phone: ")
+			= f.text_field(:phone)
+		%li
+			= f.label(:hours, "Hours")
+			= f.text_field(:hours)
+		%li
+			= f.submit("Save")
 
 = form_for @company do |f|
 	= f.label(:technology, "Technologies: ")

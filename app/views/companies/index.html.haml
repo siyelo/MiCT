@@ -1,15 +1,9 @@
 
-#info.info.index-col
+%section.listing#info
 	.notice= flash[:success]
 	.notice= flash[:error]
 
-	%a{href: new_company_path} New Company
-	- if user_signed_in?
-		= link_to "Sign out", destroy_user_session_path, method: :delete
-	- else
-		%a{href: new_user_session_path} Sign in
-
-#map.map
+%section.map#map
 
 :javascript
 	var map = L.mapbox.map('map', 'examples.h186knp8').setView([-33.93, 18.42], 15);
@@ -22,7 +16,7 @@
 			  coordinates: [#{@companies.first.longitude}, #{@companies.first.latitude}]
 		  },
 		  properties: {
-			  title: '<img class="result logo" src="#{@companies.first.avatar.url}" style="float:right;"><h3>#{@companies.first.name}</h3>',
+			  title: '<img class="result logo" src="#{@companies.first.avatar.url}"><h3>#{@companies.first.name}</h3>',
 			  description: '#{@companies.first.location}',
 			  'marker-id': 'marker-1',
 			  'marker-color': '#f86767'
@@ -35,7 +29,7 @@
 			  coordinates: [#{@companies.second.longitude}, #{@companies.second.latitude}]
 		  },
 		  properties: {
-			  title: '<img class="result logo" src="#{@companies.second.avatar.url}" style="float:right;"><h3>#{@companies.second.name}</h3>',
+			  title: '<img class="result logo" src="#{@companies.second.avatar.url}"><h3>#{@companies.second.name}</h3>',
 			  description: '#{@companies.second.location}',
 			  'marker-id': 'marker-1',
 			  'marker-color': '#f86767'
@@ -48,7 +42,7 @@
 			  coordinates: [#{@companies.third.longitude}, #{@companies.third.latitude}]
 		  },
 		  properties: {
-			  title: '<img class="result logo" src="#{@companies.third.avatar.url}" style="float:right;"><h3>#{@companies.third.name}</h3>',
+			  title: '<img class="result logo" src="#{@companies.third.avatar.url}"><h3>#{@companies.third.name}</h3>',
 			  description: '#{@companies.third.location}',
 			  'marker-id': 'marker-1',
 			  'marker-color': '#f86767'
@@ -61,7 +55,7 @@
 			  coordinates: [#{@companies.fourth.longitude}, #{@companies.fourth.latitude}]
 		  },
 		  properties: {
-			  title: '<img class="result logo" src="#{@companies.fourth.avatar.url}" style="float:right;"><h3>#{@companies.fourth.name}</h3>',
+			  title: '<img class="result logo" src="#{@companies.fourth.avatar.url}"><h3>#{@companies.fourth.name}</h3>',
 			  description: '#{@companies.fourth.location}',
 			  'marker-id': 'marker-1',
 			  'marker-color': '#f86767'

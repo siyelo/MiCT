@@ -8,5 +8,8 @@
     %meta{:content => "initial-scale=1,maximum-scale=1,user-scalable=no", :name => "viewport"}
     %script{:src => "https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.js"}
     %link{:href => "https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.css", :rel => "stylesheet"}
+    %link{href: "http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700|Roboto:400,500,700,300,100", rel: "stylesheet", type: "text/css"}
   %body
-    = yield
+    = render "shared/header"
+    .container
+      = yield

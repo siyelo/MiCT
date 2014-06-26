@@ -1,0 +1,31 @@
+#header
+	background: #333
+	padding: 0 20px
+	position: absolute
+	top: 0
+	width: 100%
+	z-index: 2
+	+box-sizing(border-box)
+
+	a
+		color: #fff
+		display: inline-block
+		line-height: $header-height
+		text-decoration: none
+
+#logo
+	float: left
+	font-weight: bold
+	text-transform: uppercase
+
+#main-nav
+	float: right
+	ul
+		+pie-clearfix
+	li
+		display: inline-block
+		float: left
+	a
+		padding: 0 15px
+		&:hover, &:focus
+			background: #222
