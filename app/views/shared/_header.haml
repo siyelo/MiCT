@@ -8,5 +8,8 @@
 			%li
 				- if user_signed_in?
 					= link_to "Sign out", destroy_user_session_path, method: :delete
+					/ Dropdown to all the companies the signed in user manages
+					/ - current_user.companies.each do |co|
+					/ 	= link_to co.name, co
 				- else
 					%a{href: new_user_session_path} Sign in

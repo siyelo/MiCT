@@ -1,6 +1,8 @@
 %h1 Edit company
+%br
 
 = render 'form'
+%br
 
 = form_for @company do |f|
 	%ul
@@ -18,11 +20,21 @@
 			= f.text_field(:hours)
 		%li
 			= f.submit("Save")
+%br
 
-= form_for @company do |f|
-	= f.label(:technology, "Technologies: ")
-	= f.text_field(:technology)
-	= f.submit("Save")
+= form_tag(companies_tech_tags_path, :method=>'post') do
+	%ul
+		%li
+			= label_tag("add_tech",  "Add technologies: ")
+			= select_tag("add_tech", options_from_collection_for_select(@technology - @company.technologies, "id", "name"), multiple: true, id: "select2")
+		%li
+			= label_tag("remove_tech", "Remove technologies: ")
+			= select_tag("remove_tech", options_from_collection_for_select(@company.technologies, "id", "name"), multiple: true, class: "select2")
+		%li
+			= hidden_field_tag("id", value = params[:id])
+		%li
+			= submit_tag "Save"
+%br
 
 = link_to 'Back', @company
 

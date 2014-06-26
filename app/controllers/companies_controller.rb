@@ -29,10 +29,12 @@ class CompaniesController < ApplicationController
 
   def edit
     @company = Company.find(params[:id])
+    @technology = Technology.all
   end
 
   def update
     @company = Company.find(params[:id])
+
     company_params.each {|attribute, value|
       company_params.delete(attribute) if company_params[:value] == ""
     }
@@ -43,6 +45,23 @@ class CompaniesController < ApplicationController
   end
 
   def destroy
+  end
+
+  def tech_tags
+    @company = Company.find(params[:id])
+    if params[:add_tech] != nil
+      params[:add_tech].each { |t|
+        @company.technologies << Technology.find(t)
+      }
+    end
+    if params[:remove_tech] != nil
+      params[:remove_tech].each { |t|
+        @company.technologies.delete(Technology.find(t))
+      }
+    end
+
+    flash[:success] = "Company profile successfully changed."
+    redirect_to @company
   end
 
   private
