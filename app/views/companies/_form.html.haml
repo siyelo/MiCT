@@ -10,11 +10,11 @@
 			= f.label(:avatar, "Upload Logo: ")
 			= f.file_field(:avatar)
 		%li
-			= f.label(:status, "Hiring")
 			= f.radio_button(:status, "Hiring")
+			= f.label(:status, "Hiring")
 		%li
-			= f.label(:status, "Seeking funding")
 			= f.radio_button(:status, "Seeking funding")
+			= f.label(:status, "Seeking funding")
 		%li
 			%input#location.textbox{name: "company[location]", type: "text-field", value: ""}/
 			= f.hidden_field :latitude
