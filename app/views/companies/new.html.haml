@@ -1,5 +1,9 @@
 %h1 New company
 
+%p
+	.notice= flash[:success]
+	.notice= flash[:error]
+
 = render 'form'
 
 = link_to 'Back', root_path

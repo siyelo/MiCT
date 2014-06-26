@@ -9,60 +9,7 @@
 	var map = L.mapbox.map('map', 'examples.h186knp8').setView([-33.93, 18.42], 15);
 	var myLayer = L.mapbox.featureLayer().addTo(map);
 
-	myLayer.setGeoJSON([{
-		  type: 'Feature',
-		  geometry: {
-			  type: 'Point',
-			  coordinates: [#{@companies.first.longitude}, #{@companies.first.latitude}]
-		  },
-		  properties: {
-			  title: '<img class="result logo" src="#{@companies.first.avatar.url}"><h3>#{@companies.first.name}</h3>',
-			  description: '#{@companies.first.location}',
-			  'marker-id': 'marker-1',
-			  'marker-color': '#f86767'
-		  }
-	  },
-	  {
-		  type: 'Feature',
-		  geometry: {
-			  type: 'Point',
-			  coordinates: [#{@companies.second.longitude}, #{@companies.second.latitude}]
-		  },
-		  properties: {
-			  title: '<img class="result logo" src="#{@companies.second.avatar.url}"><h3>#{@companies.second.name}</h3>',
-			  description: '#{@companies.second.location}',
-			  'marker-id': 'marker-1',
-			  'marker-color': '#f86767'
-		  }
-	  },
-	  {
-		  type: 'Feature',
-		  geometry: {
-			  type: 'Point',
-			  coordinates: [#{@companies.third.longitude}, #{@companies.third.latitude}]
-		  },
-		  properties: {
-			  title: '<img class="result logo" src="#{@companies.third.avatar.url}"><h3>#{@companies.third.name}</h3>',
-			  description: '#{@companies.third.location}',
-			  'marker-id': 'marker-1',
-			  'marker-color': '#f86767'
-		  }
-	  },
-	  {
-		  type: 'Feature',
-		  geometry: {
-			  type: 'Point',
-			  coordinates: [#{@companies.fourth.longitude}, #{@companies.fourth.latitude}]
-		  },
-		  properties: {
-			  title: '<img class="result logo" src="#{@companies.fourth.avatar.url}"><h3>#{@companies.fourth.name}</h3>',
-			  description: '#{@companies.fourth.location}',
-			  'marker-id': 'marker-1',
-			  'marker-color': '#f86767'
-		  }
-	  },
-	]);
-  
+	loadMarkers = function(data) {myLayer.setGeoJSON(data);
 	var info = document.getElementById('info');
 
 	// Iterate through each feature layer item, build a
@@ -96,3 +43,12 @@
 	};
 	});
 
+
+	 };
+
+	$.ajax({
+		type: "GET",
+		url: "/companies",
+		dataType: "json",
+		success: loadMarkers
+	});

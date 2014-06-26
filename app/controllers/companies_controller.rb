@@ -2,7 +2,9 @@ class CompaniesController < ApplicationController
   before_filter :authenticate_user!, :only => [:new, :edit, :destroy]
 
   def index
-  	@companies = Company.all
+    @search = Company.search(params[:q])
+    @found = @search.result(distinct: true)
+  	@companies = @found
   end
 
   def show
@@ -18,11 +20,11 @@ class CompaniesController < ApplicationController
 
     if @company.save
     	flash[:success] = "Company successfully created."
+      redirect_to root_path
     else
       flash[:error] = "Company could not be created."
+      render "companies/new"
     end
-
-  	redirect_to root_path
   end
 
   def edit
@@ -45,7 +47,7 @@ class CompaniesController < ApplicationController
 
   private
   def company_params
-    params.require(:company).permit(:name, :size, :avatar, :location, :status, :latitude, :longitude)
+    params.require(:company).permit(:name, :size, :avatar, :location, :status, :latitude, :longitude, :phone)
   end
 
 end
