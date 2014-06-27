@@ -5,9 +5,9 @@ class Company < ActiveRecord::Base
 	validates :name, presence: true
 	validates :size, presence: true
 
-	validates_format_of :phone,
-      :with => /[0-9]{3}-[0-9]{3}-[0-9]{4}/,
-      :message => "Phone numbers must be in 123-456-6789 format."
+	# validates_format_of :phone,
+ #      :with => /[0-9]{3}-[0-9]{3}-[0-9]{4}/,
+ #      :message => "Phone numbers must be in 123-456-6789 format."
 
 	# attr_accessor :location, :latitude, :longitude
 	geocoded_by :location

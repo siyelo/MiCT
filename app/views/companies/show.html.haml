@@ -49,20 +49,20 @@
 		|
 		%a{href: "#similar"} Similar Companies
 
-#map
-	%iframe{frameborder: "0", height: "450", src: "https://www.google.com/maps/embed/v1/place?key=AIzaSyCh6MlmTqA9E2WD4Gt4AB6eIg_0N3fMvRw&q=#{@company.location.gsub(" ", "+")}", style: "border:0", width: "100%"}
-	%table.map-images
-		%tr
-			%td 
-				%img{src: "http://i283.photobucket.com/albums/kk307/malmal718/backgrounds-3.jpg"}
-			%td
-				%img{src: "http://i283.photobucket.com/albums/kk307/malmal718/backgrounds-3.jpg"}
-		%tr
-			%td
-				%img{src: "http://i283.photobucket.com/albums/kk307/malmal718/backgrounds-3.jpg"}
-			%td
-				%img{src: "http://i283.photobucket.com/albums/kk307/malmal718/backgrounds-3.jpg"}
 
+
+#map{frameborder: "0", style: "border:0; height:500px;", width: "100%"}
+/ %table.map-images
+/ 	%tr
+/ 		%td 
+/ 			%img{src: "http://i283.photobucket.com/albums/kk307/malmal718/backgrounds-3.jpg"}
+/ 		%td
+/ 			%img{src: "http://i283.photobucket.com/albums/kk307/malmal718/backgrounds-3.jpg"}
+/ 	%tr
+/ 		%td
+/ 			%img{src: "http://i283.photobucket.com/albums/kk307/malmal718/backgrounds-3.jpg"}
+/ 		%td
+/ 			%img{src: "http://i283.photobucket.com/albums/kk307/malmal718/backgrounds-3.jpg"}
 #about.info
 	%h1 About
 	%p
@@ -76,3 +76,15 @@
 #similar.info
 	%h1 Similar Companies
 	%p
+
+:javascript
+	var map = L.mapbox.map('map', 'examples.h186knp8').setView([-33.93, 18.42], 20);
+
+	var marker = L.marker([#{@company.latitude}, #{@company.longitude}] ).addTo(map);
+
+	map.panTo(marker._latlng)
+
+	map.dragging.disable();
+	map.touchZoom.disable();
+	map.doubleClickZoom.disable();
+	map.scrollWheelZoom.disable();
