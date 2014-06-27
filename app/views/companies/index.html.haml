@@ -1,16 +1,16 @@
 %section
 	.notice= flash[:success]
 	.notice= flash[:error]
+	= form_tag companies_path, :method => 'get' do
+		= text_field_tag :search, params[:search]
+		= submit_tag "Search", :name => nil
 	%ul.listing#info
-    = form_tag root_path, :method => 'get', id: 'search' do
-        = search_field_tag('search_co', params[:q], :placeholder =>"Search...")
-        = submit_tag "Go", :title => nil, :id => "search_co"
 
 %section.map#map
 
 :javascript
 
-	var map = L.mapbox.map('map', 'examples.h186knp8').setView([-33.93, 18.42], 15);
+	var map = L.mapbox.map('map', 'examples.h186knp8').setView([-33.93, 18.42], 10);
 	
 
 	var myLayer = null;
@@ -69,6 +69,7 @@
 			placeMarkers(myLayer, data);
 			setTimeout( function() {
 			map.fitBounds(myLayer.getBounds());
-			}, 0);
+			}, 50);
 		}
 	});
+

@@ -2,9 +2,8 @@ class CompaniesController < ApplicationController
   before_filter :authenticate_user!, :only => [:new, :edit, :destroy]
 
   def index
-    q = "%#{params[:search_co]}%"
-    @companies = Company.where("name like ? or status like ?", q, q)
-  
+    @companies = Company.search(params[:search])
+
     # @search = Company.search(params[:q])
     # @found = @search.result(distinct: true)
   end
