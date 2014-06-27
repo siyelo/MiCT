@@ -11,6 +11,7 @@
  * file per style scope.
  *
  *= require_self
+ *= require 'select2'
  */
 
 @import compass/reset
@@ -20,5 +21,10 @@
 @import partials/base
 @import partials/layout
 @import shared/header
+@import partials/devise
+@import partials/form
 @import partials/listing
 @import partials/users
+
+.select2
+  width: 250px

@@ -1,8 +1,10 @@
-
 %section
 	.notice= flash[:success]
 	.notice= flash[:error]
 	%ul.listing#info
+    = form_tag root_path, :method => 'get', id: 'search' do
+        = search_field_tag('search_co', params[:q], :placeholder =>"Search...")
+        = submit_tag "Go", :title => nil, :id => "search_co"
 
 %section.map#map
 

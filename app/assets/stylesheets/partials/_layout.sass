@@ -8,10 +8,15 @@
 
 .listing
 	float: left
-	overflow-y: scroll
-	width: 60%
+	overflow-y: auto
+	width: 45%
 	height: 100%
+	@media screen and (max-width: 600px)
+		float: none
+		width: 100%
 
 .map
 	float: right
-	width: 40%
+	width: 55%
+	@media screen and (max-width: 600px)
+		display: none

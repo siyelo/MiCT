@@ -1,26 +1,23 @@
 = form_for @company, {name: "form1"} do |f|
 	%ul
 		%li
-			= f.label(:name, "Name: ")
-			= f.text_field(:name)
+			= f.text_field(:name, placeholder: "Name")
 		%li
-			= f.label(:size, "Size: ")
-			= f.number_field(:size)
+			= f.number_field(:size, placeholder: "Size")
 		%li
-			= f.label(:avatar, "Upload Logo: ")
-			= f.file_field(:avatar)
+			= f.file_field(:avatar, placeholder: "Upload Logo")
 		%li
 			= f.radio_button(:status, "Hiring")
-			= f.label(:status, "Hiring")
+			= f.label(:status, "Hiring", placeholder: "")
 		%li
 			= f.radio_button(:status, "Seeking funding")
-			= f.label(:status, "Seeking funding")
+			= f.label(:status, "Seeking funding", placeholder: "")
 		%li
-			%input#location.textbox{name: "company[location]", type: "text-field", value: ""}/
+			%input#location.textbox{name: "company[location]", type: "text", value: ""}/
 			= f.hidden_field :latitude
 			= f.hidden_field :longitude
 		%li
-			= f.submit("Save")
+			= f.submit("Save", class: "button")
 
 
 
@@ -42,13 +39,13 @@
 	});
 
 	//Add listener to search
-	searchform.addEventListener("submit", function() {
-		var newlatlong = new google.maps.LatLng(place.geometry.location.lat(),place.geometry.location.lng());
-		map.setCenter(newlatlong);
-		marker.setPosition(newlatlong);
-		map.setZoom(12);
+	// searchform.addEventListener("submit", function() {
+	// 	var newlatlong = new google.maps.LatLng(place.geometry.location.lat(),place.geometry.location.lng());
+	// 	map.setCenter(newlatlong);
+	// 	marker.setPosition(newlatlong);
+	// 	map.setZoom(12);
 
-	});
+	// });
 	 
 	//Reset the inpout box on click
 	input.addEventListener('click', function(){
