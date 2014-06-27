@@ -38,7 +38,7 @@
 		%li
 			= label_tag("add_tech",  "Add technologies: ")
 			%br
-			= select_tag("add_tech", options_from_collection_for_select(@technology - @company.technologies, "id", "name"), multiple: true, id: "select2")
+			= select_tag("add_tech", options_from_collection_for_select(@technology - @company.technologies, "id", "name"), multiple: true, class: "select2")
 		%li
 			= label_tag("remove_tech", "Remove technologies: ")
 			%br

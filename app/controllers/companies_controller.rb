@@ -3,15 +3,29 @@ class CompaniesController < ApplicationController
   before_action :authorize_user, :only => [:edit, :destroy]
 
   def index
-    q = "'%#{params[:search_term]}%'"
-    @companies = Company.where("name like ? or status like ?", q, q)
-  
-    # @search = Company.search(params[:q])
-    # @companies = @search.result(distinct: true)
+    # s = "%#{params[:search_s]}%"
+    # @companies = Company.where("name like ? or status like ?", s, s)
+    @q = Company.search(params[:q], user_id: current_user.id)
+    @companies = @q.result(distinct: true)
+
+    # params[:search_t].each {|t|
+    #   companies += t.companies
+    # }
+    # @companies = companies
+    
   end
 
   def show
     @company = Company.find(params[:id])
+
+    #------similar companies------
+    # share the same main programming language
+    # similar = @company.technologies.first.companies
+    # similar size
+    # @similar = similar.select {|co| (Math.log(co.size) - Math.log(@company.size)).abs <= 0.25}
+
+    @primary_tech = @company.technologies.first
+
   end
 
   def new

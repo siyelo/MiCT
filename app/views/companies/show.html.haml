@@ -2,89 +2,99 @@
 .notice= flash[:error]
 
 :css
-	.header{background-image: url("")}
+    .header{background-image: url("")}
 
 %nav
 
 - if user_signed_in?
-	- if (current_user.id == @company.user.id)
-		= link_to "Edit Profile", edit_company_path
+    - if (current_user.id == @company.user.id)
+        = link_to "Edit Profile", edit_company_path
 
 .header.info
-	%h1= @company.name
-	
-	company type
-	%br
-	%br
-	%br
+    %h1= @company.name
+    
+    %br
+    %br
+    %br
 
-	.description= @company.info
-	%br
-	%br
+    .description= @company.info
+    %br
+    %br
 
-	%ul.basic-info
-		%li
-			%img.logo{src: @company.avatar.url(:thumb)}
-			.text #{@company.website}
-		%li
-			%img.logo{src: @company.avatar.url(:thumb)}
-			.text #{@company.email}
-		%li
-			%img.logo{src: @company.avatar.url(:thumb)}
-			.text #{@company.phone}
-		%li
-			%img.logo{src: @company.avatar.url(:thumb)}
-			.text #{@company.hours}
-		%li
-			%img.logo{src: @company.avatar.url(:thumb)}
-			.text #{@company.size}
+    %ul.basic-info
+        %li
+            // %img.logo{src: @company.avatar.url(:thumb)}
+            .text #{@company.website}
+        %li
+            // %img.logo{src: @company.avatar.url(:thumb)}
+            .text #{@company.email}
+        %li
+            // %img.logo{src: @company.avatar.url(:thumb)}
+            .text #{@company.phone}
+        %li
+            // %img.logo{src: @company.avatar.url(:thumb)}
+            .text #{@company.hours}
+        %li
+            // %img.logo{src: @company.avatar.url(:thumb)}
+            .text #{@company.size}
 
-	%hr
-	%nav
-		%a{href: "#map"} Location 
-		|
-		%a{href: "#about"} About
-		|
-		%a{href: "#tech"} Technologies
-		|
-		%a{href: "#similar"} Similar Companies
+    %hr
+    %nav
+        %a{href: "#map"} Location 
+        |
+        %a{href: "#about"} About
+        |
+        %a{href: "#tech"} Technologies
+        |
+        %a{href: "#similar"} Similar Companies
 
 
 
 #map{frameborder: "0", style: "border:0; height:500px;", width: "100%"}
 / %table.map-images
-/ 	%tr
-/ 		%td 
-/ 			%img{src: "http://i283.photobucket.com/albums/kk307/malmal718/backgrounds-3.jpg"}
-/ 		%td
-/ 			%img{src: "http://i283.photobucket.com/albums/kk307/malmal718/backgrounds-3.jpg"}
-/ 	%tr
-/ 		%td
-/ 			%img{src: "http://i283.photobucket.com/albums/kk307/malmal718/backgrounds-3.jpg"}
-/ 		%td
-/ 			%img{src: "http://i283.photobucket.com/albums/kk307/malmal718/backgrounds-3.jpg"}
+/   %tr
+/       %td 
+/           %img{src: "http://i283.photobucket.com/albums/kk307/malmal718/backgrounds-3.jpg"}
+/       %td
+/           %img{src: "http://i283.photobucket.com/albums/kk307/malmal718/backgrounds-3.jpg"}
+/   %tr
+/       %td
+/           %img{src: "http://i283.photobucket.com/albums/kk307/malmal718/backgrounds-3.jpg"}
+/       %td
+/           %img{src: "http://i283.photobucket.com/albums/kk307/malmal718/backgrounds-3.jpg"}
 #about.info
-	%h1 About
-	%p
+    %h1 About
+    %p
 
 #tech.info
-	%h1 Technologies
-	%ul
-	- @company.technologies.each do |t|
-		%li #{t.name}
+    %h1 Technologies
+    %ul
+    - @company.technologies.each do |t|
+        %li #{t.name}
 
 #similar.info
-	%h1 Similar Companies
-	%p
-
+    %h1 Similar Companies
+    - if @primary_tech
+        %h1 Companies that also work in #{@primary_tech.name}:
+        %ul
+            - @primary_tech.companies.each do |co|
+                %li 
+                    = link_to co.name, co
+    - if @primary_tech
+        %h1 Companies of a similar size:
+        %ul
+            - Company.all.select {|co| (Math.log(co.size) - Math.log(@company.size)).abs <= 0.3}.each do |co|
+                %li 
+                    = link_to co.name, co
+    
 :javascript
-	var map = L.mapbox.map('map', 'examples.h186knp8').setView([-33.93, 18.42], 20);
+    var map = L.mapbox.map('map', 'examples.h186knp8').setView([-33.93, 18.42], 20);
 
-	var marker = L.marker([#{@company.latitude}, #{@company.longitude}] ).addTo(map);
+    var marker = L.marker([#{@company.latitude}, #{@company.longitude}] ).addTo(map);
 
-	map.panTo(marker._latlng)
+    map.panTo(marker._latlng)
 
-	map.dragging.disable();
-	map.touchZoom.disable();
-	map.doubleClickZoom.disable();
-	map.scrollWheelZoom.disable();
+    map.dragging.disable();
+    map.touchZoom.disable();
+    map.doubleClickZoom.disable();
+    map.scrollWheelZoom.disable();

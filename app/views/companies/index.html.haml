@@ -1,15 +1,25 @@
 %section
 	.notice= flash[:success]
 	.notice= flash[:error]
-	%ul.listing#info
-    = form_tag root_path, :method => 'get', id: 'search' do
-        = search_field_tag('search_term', params[:search_term], :placeholder =>"Search...")
-        = submit_tag "Go", :title => nil
 
-    / = search_form_for @search do |f|
-    /     = f.label :name_cont, "Name contains"
-    /     = f.text_field :name_cont
-    /     = f.submit "Search"
+	%ul.listing#info
+
+	= form_tag root_path, :method => 'get', id: 'search' do
+		= search_field_tag('search_s')
+		%ul
+			%li
+				= select_tag('search_t', options_from_collection_for_select(Technology.all, "id", "name"), multiple: true, class: "select2")
+		= submit_tag "Go", :title => nil
+	
+
+	= search_form_for @q do |f|
+		= f.label :name_cont, "Name contains"
+		= f.text_field :name_cont
+		= f.label :size_gteq, "Size is greater than "
+		= f.text_field :size_gteq
+		= f.label :size_lteq, "Size is less than "
+		= f.text_field :size_lteq
+		= f.submit
 
 
 %section.map#map
