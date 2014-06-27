@@ -68,7 +68,7 @@ class CompaniesController < ApplicationController
 
   private
   def company_params
-    params.require(:company).permit(:name, :size, :avatar, :location, :status, :latitude, :longitude, :phone)
+    params.require(:company).permit(:name, :size, :avatar, :location, :status, :latitude, :longitude, :phone, :email, :website, :hours)
   end
 
   def authorize_user
