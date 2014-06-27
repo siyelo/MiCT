@@ -1,10 +1,16 @@
 %section
 	.notice= flash[:success]
 	.notice= flash[:error]
-	= form_tag companies_path, :method => 'get' do
-		= text_field_tag :search, params[:search]
-		= submit_tag "Search", :name => nil
+	= form_tag root_path, :method => 'get', id: 'search' do
+		= search_field_tag('search_term', params[:search_term], :placeholder =>"Search...")
+		= submit_tag "Go", :title => nil
 	%ul.listing#info
+
+	/ = search_form_for @search do |f|
+	/     = f.label :name_cont, "Name contains"
+	/     = f.text_field :name_cont
+	/     = f.submit "Search"
+
 
 %section.map#map
 
