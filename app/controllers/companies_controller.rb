@@ -1,12 +1,13 @@
 class CompaniesController < ApplicationController
   before_filter :authenticate_user!, :only => [:new, :edit, :destroy]
+  before_action :authorize_user, :only => [:edit, :destroy]
 
   def index
-    q = "%#{params[:search_co]}%"
+    q = "'%#{params[:search_term]}%'"
     @companies = Company.where("name like ? or status like ?", q, q)
   
     # @search = Company.search(params[:q])
-    # @found = @search.result(distinct: true)
+    # @companies = @search.result(distinct: true)
   end
 
   def show
@@ -70,4 +71,10 @@ class CompaniesController < ApplicationController
     params.require(:company).permit(:name, :size, :avatar, :location, :status, :latitude, :longitude, :phone)
   end
 
+  def authorize_user
+    unless user_signed_in? && current_user.id == Company.find(params[:id]).user.id
+      flash[:error] = "You do not have permission to view that page."
+      redirect_to Company.find(params[:id])
+    end
+  end
 end

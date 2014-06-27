@@ -1,9 +1,8 @@
-%h1 Basic information
+%h1 Basic Information
 = render 'form'
 %br
-%br
 
-%h1 Contact information
+%h1 Contact Information
 = form_for @company do |f|
 	%ul
 		%li
@@ -21,17 +20,16 @@
 		%li
 			= f.submit("Save")
 %br
-%br
 
 %h1 Description
 = form_for @company do |f|
 	%ul
 		%li
 			= f.label(:info, "About: ")
+			%br
 			= f.text_area(:info)
 		%li
 			= f.submit("Save")
-%br
 %br
 
 %h1 Technology
@@ -39,9 +37,11 @@
 	%ul
 		%li
 			= label_tag("add_tech",  "Add technologies: ")
-			= select_tag("add_tech", options_from_collection_for_select(@technology - @company.technologies, "id", "name"), multiple: true, class: "select2")
+			%br
+			= select_tag("add_tech", options_from_collection_for_select(@technology - @company.technologies, "id", "name"), multiple: true, id: "select2")
 		%li
 			= label_tag("remove_tech", "Remove technologies: ")
+			%br
 			= select_tag("remove_tech", options_from_collection_for_select(@company.technologies, "id", "name"), multiple: true, class: "select2")
 		%li
 			= hidden_field_tag("id", value = params[:id])
