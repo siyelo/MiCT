@@ -42,13 +42,13 @@
 	});
 
 	//Add listener to search
-	searchform.addEventListener("submit", function() {
-		var newlatlong = new google.maps.LatLng(place.geometry.location.lat(),place.geometry.location.lng());
-		map.setCenter(newlatlong);
-		marker.setPosition(newlatlong);
-		map.setZoom(12);
+	// searchform.addEventListener("submit", function() {
+	// 	var newlatlong = new google.maps.LatLng(place.geometry.location.lat(),place.geometry.location.lng());
+	// 	map.setCenter(newlatlong);
+	// 	marker.setPosition(newlatlong);
+	// 	map.setZoom(12);
 
-	});
+	// });
 	 
 	//Reset the inpout box on click
 	input.addEventListener('click', function(){

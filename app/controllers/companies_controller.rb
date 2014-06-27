@@ -2,9 +2,11 @@ class CompaniesController < ApplicationController
   before_filter :authenticate_user!, :only => [:new, :edit, :destroy]
 
   def index
-    @search = Company.search(params[:q])
-    @found = @search.result(distinct: true)
-  	@companies = @found
+    q = "%#{params[:search_co]}%"
+    @companies = Company.where("name like ? or status like ?", q, q)
+  
+    # @search = Company.search(params[:q])
+    # @found = @search.result(distinct: true)
   end
 
   def show
@@ -34,11 +36,10 @@ class CompaniesController < ApplicationController
 
   def update
     @company = Company.find(params[:id])
+    updates = company_params
 
-    company_params.each {|attribute, value|
-      company_params.delete(attribute) if company_params[:value] == ""
-    }
-    @company.update_attributes(company_params)
+    updates.each {|key, value| updates.delete(key) if value == ""}
+    @company.update_attributes(updates)
 
     flash[:success] = "Company profile successfully changed."
     redirect_to @company
