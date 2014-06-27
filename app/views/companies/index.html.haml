@@ -1,32 +1,25 @@
-%section
+%section.listing
 	.notice= flash[:success]
 	.notice= flash[:error]
 
 	%ul.listing#info
 
-	= form_tag root_path, :method => 'get', id: 'search' do
-		= search_field_tag('search_s')
-		%ul
-			%li
-				= select_tag('search_t', options_from_collection_for_select(Technology.all, "id", "name"), multiple: true, class: "select2")
-		= submit_tag "Go", :title => nil
-	
+	/ = select_tag('search_t', options_from_collection_for_select(Technology.all, "id", "name"), multiple: true, class: "select2")
 
-	= search_form_for @q do |f|
-		= f.label :name_cont, "Name contains"
-		= f.text_field :name_cont
-		= f.label :size_gteq, "Size is greater than "
-		= f.text_field :size_gteq
-		= f.label :size_lteq, "Size is less than "
-		= f.text_field :size_lteq
-		= f.submit
-
+	/ = search_form_for @q do |f|
+	/ 	= f.label :name_cont, "Name contains"
+	/ 	= f.text_field :name_cont
+	/ 	= f.label :size_gteq, "Size is greater than "
+	/ 	= f.text_field :size_gteq
+	/ 	= f.label :size_lteq, "Size is less than "
+	/ 	= f.text_field :size_lteq
+	/ 	= f.submit
 
 %section.map#map
 
 :javascript
 
-	var map = L.mapbox.map('map', 'examples.h186knp8').setView([-33.93, 18.42], 15);
+	var map = L.mapbox.map('map', 'examples.h186knp8').setView([-33.93, 18.42], 10);
 	
 
 	var myLayer = null;
@@ -85,6 +78,7 @@
 			placeMarkers(myLayer, data);
 			setTimeout( function() {
 			map.fitBounds(myLayer.getBounds());
-			}, 0);
+			}, 50);
 		}
 	});
+

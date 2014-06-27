@@ -15,5 +15,9 @@
 //= require turbolinks
 //= require_tree .
 //= require_self
+$(document).ready(function() { $("#select2").select2(); });
 
+<<<<<<< HEAD
 $(document).ready(function() { $(".select2").select2(); });
+=======
+>>>>>>> 6e09acae5fbc28c62a5931d48bb52863ed2dae90

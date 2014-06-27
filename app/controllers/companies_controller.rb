@@ -3,16 +3,14 @@ class CompaniesController < ApplicationController
   before_action :authorize_user, :only => [:edit, :destroy]
 
   def index
-    # s = "%#{params[:search_s]}%"
-    # @companies = Company.where("name like ? or status like ?", s, s)
-    @q = Company.search(params[:q], user_id: current_user.id)
-    @companies = @q.result(distinct: true)
-
-    # params[:search_t].each {|t|
-    #   companies += t.companies
-    # }
-    # @companies = companies
+    q = "'%#{params[:search_term]}%'"
+    @companies = Company.where("name like ? or status like ?", q, q)
     
+    
+    
+    # @search = Company.search(params[:q])
+    # @companies = @search.result(distinct: true)
+
   end
 
   def show

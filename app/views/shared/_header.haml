@@ -1,6 +1,11 @@
 %header#header
-	%h1#logo
-		= link_to "Made in Cape Town", "/"
+	.listing
+		%h1#logo
+			= link_to "Made in Cape Town", "/"
+
+		= form_tag root_path, :method => 'get', id: 'search' do
+			= search_field_tag('search_term', params[:search_term], :placeholder =>"Search...")
+			= submit_tag "Go", title: nil, class: "button"
 	%nav#main-nav
 		%ul
 			%li
