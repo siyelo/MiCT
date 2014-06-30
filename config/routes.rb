@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :companies, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   post 'companies/tech_tags' => 'companies#tech_tags'
 
+  post 'companies/index' => 'companies#index'
   root 'companies#index'
   
   # The priority is based upon order of creation: first created -> highest priority.
