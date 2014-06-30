@@ -11,6 +11,14 @@ class Company < ActiveRecord::Base
 	#   end
 	# end
 
+	def get_techs
+		arr = ""
+		self.technologies.each do |t|
+			arr + t.name
+		end
+		arr
+	end
+
 	validates :name, presence: true
 	validates :size, presence: true
 
