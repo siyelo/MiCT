@@ -1,8 +1,9 @@
-%section
-	.notice= flash[:success]
-	.notice= flash[:error]
-
+%section#parent
 	%ul.listing#info
+		.notice= flash[:success]
+		.notice= flash[:error]
+		- if current_user.companies != nil
+			%p= current_user.name 
 
 	/ = select_tag('search_t', options_from_collection_for_select(Technology.all, "id", "name"), multiple: true, class: "select2")
 
@@ -49,8 +50,8 @@
 
 		// Populate content from each markers object.
 		link.innerHTML = marker.feature.properties.title +
-		  '' + marker.feature.properties.description + '';
-		link.onclick = function() {
+		  '' + marker.feature.properties.additional + '';
+		link.onmouseover = function() {
 		  if (/active/.test(this.className)) {
 			this.className = this.className.replace(/active/, '').replace(/\s\s*$/, '');
 		  } else {
@@ -82,3 +83,9 @@
 		}
 	});
 
+
+/ var parent = document.getElementById('parent')
+
+/ var child = document.getElementById('info')
+
+/ parent.removeChild(child);
