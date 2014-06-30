@@ -3,9 +3,8 @@ class CompaniesController < ApplicationController
   before_action :authorize_user, :only => [:edit, :destroy]
 
   def index
-    # q = "'%#{params[:search_term]}%'"
-    # @companies = Company.where("name like ? or status like ?", q, q)
     @companies = Company.all
+    # @companies = Company.all
     # @search = Company.search(params[:q])
     # @companies = @search.result(distinct: true)
   end
@@ -49,26 +48,19 @@ class CompaniesController < ApplicationController
   def destroy
   end
 
-  def tech_tags
-    @company = Company.find(params[:id])
-    if params[:add_tech] != nil
-      params[:add_tech].each { |t|
-        @company.technologies << Technology.find(t)
-      }
-    end
-    if params[:remove_tech] != nil
-      params[:remove_tech].each { |t|
-        @company.technologies.delete(Technology.find(t))
-      }
-    end
+  # def tech_tags
+  #   @company = Company.find(params[:id])
+  #   if @company
+  #     @company.update_attributes(params.slice() 
+  #   end
 
-    flash[:success] = "Company profile successfully changed."
-    redirect_to @company
-  end
+  #   flash[:success] = "Company profile successfully changed."
+  #   redirect_to @company
+  # end
 
   private
   def company_params
-    params.require(:company).permit(:name, :size, :avatar, :location, :status, :latitude, :longitude, :phone, :email, :website, :hours)
+    params.require(:company).permit(:technologies_ids, :name, :size, :avatar, :location, :status, :latitude, :longitude, :phone, :email, :website, :hours)
   end
 
   def authorize_user
