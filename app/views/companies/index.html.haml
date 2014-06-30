@@ -6,14 +6,14 @@
 
 	/ = select_tag('search_t', options_from_collection_for_select(Technology.all, "id", "name"), multiple: true, class: "select2")
 
-	/ = search_form_for @q do |f|
-	/ 	= f.label :name_cont, "Name contains"
-	/ 	= f.text_field :name_cont
-	/ 	= f.label :size_gteq, "Size is greater than "
-	/ 	= f.text_field :size_gteq
-	/ 	= f.label :size_lteq, "Size is less than "
-	/ 	= f.text_field :size_lteq
-	/ 	= f.submit
+	= search_form_for @q do |f|
+		= f.label :name_cont, "Name contains"
+		= f.text_field :name_cont
+		= f.label :size_gteq, "Size is greater than "
+		= f.text_field :size_gteq
+		= f.label :size_lteq, "Size is less than "
+		= f.text_field :size_lteq
+		= f.submit
 
 %section.map#map
 
@@ -24,13 +24,37 @@
 
 	var myLayer = null;
 
+	$('#company_search').on('submit', function(e) {
+		e.preventDefault();
 
-	var fetchMarkers = function(callbacks) {
+		fetchMarkers({
+			onComplete: function(data) {
+				// once the data has been fetched
+
+				// clear all markers
+
+				// add markers from data (if there are any?)
+				placeMarkers(myLayer, data);
+
+				if (data.length > 0) {
+					setTimeout( function() {
+					map.fitBounds(myLayer.getBounds());
+					}, 50);
+				}
+				
+			},
+			data: $('#company_search').serialize()
+		});
+	});
+
+
+	var fetchMarkers = function(args) {
 		$.ajax({
 			type: "GET",
+			data: args.data,
 			url: "/companies",
 			dataType: "json",
-			success: callbacks.onComplete
+			success: args.onComplete
 		});
 	};
 
@@ -73,6 +97,7 @@
 	};
 
 	myLayer = L.mapbox.featureLayer().addTo(map);
+
 	fetchMarkers({
 		onComplete: function(data) {
 			placeMarkers(myLayer, data);
