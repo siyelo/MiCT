@@ -5,12 +5,25 @@ class CompaniesController < ApplicationController
   def index
     @companies = Company.all
     # @companies = Company.all
+    #q = "'%#{params[:search_term]}%'"
+    #@companies = Company.where("name like ? or status like ?", q, q)
+
     # @search = Company.search(params[:q])
     # @companies = @search.result(distinct: true)
+
   end
 
   def show
     @company = Company.find(params[:id])
+
+    #------similar companies------
+    # share the same main programming language
+    # similar = @company.technologies.first.companies
+    # similar size
+    # @similar = similar.select {|co| (Math.log(co.size) - Math.log(@company.size)).abs <= 0.25}
+
+    @primary_tech = @company.technologies.first
+
   end
 
   def new
