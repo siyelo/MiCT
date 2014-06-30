@@ -2,7 +2,7 @@
 .notice= flash[:error]
 
 :css
-	.header{background-image: url("")}
+    .header{background-image: url("")}
 
 %nav
 
@@ -10,34 +10,34 @@
     = link_to "Edit Profile", edit_company_path
 
 %section.profile
-	.header.info
-		.prof-head
-			%img.prof(src="#{@company.avatar.url}")
-			%h1= @company.name
-			company type
-		.description= @company.info
+    .header.info
+        .prof-head
+            %img.prof(src="#{@company.avatar.url}")
+            %h1= @company.name
+            company type
+        .description= @company.info
 
-		%ul.basic-info
-			%li
-				%img.logo{src: @company.avatar.url(:thumb)}
-				// ICON
-				.text= @company.website
-			%li
-				%img.logo{src: @company.avatar.url(:thumb)}
-				// ICON
-				.text= @company.email
-			%li
-				%img.logo{src: @company.avatar.url(:thumb)}
-				// ICON
-				.text= @company.phone
-			%li
-				%img.logo{src: @company.avatar.url(:thumb)}
-				// ICON
-				.text= @company.hours
-			%li
-				%img.logo{src: @company.avatar.url(:thumb)}
-				// ICON
-				.text= @company.size
+        %ul.basic-info
+            %li
+                %img.logo{src: @company.avatar.url(:thumb)}
+                // ICON
+                .text= @company.website
+            %li
+                %img.logo{src: @company.avatar.url(:thumb)}
+                // ICON
+                .text= @company.email
+            %li
+                %img.logo{src: @company.avatar.url(:thumb)}
+                // ICON
+                .text= @company.phone
+            %li
+                %img.logo{src: @company.avatar.url(:thumb)}
+                // ICON
+                .text= @company.hours
+            %li
+                %img.logo{src: @company.avatar.url(:thumb)}
+                // ICON
+                .text= @company.size
 
         %hr
         %nav
@@ -74,19 +74,24 @@
 
 #similar.info
     %h1 Similar Companies
-    - if @primary_tech
-        %h1 Companies that also work in #{@primary_tech.name}:
+    - if @primary_tech_co
+        %h1 Companies that also work in #{@company.technologies.first.name}:
         %ul
-            - @primary_tech.companies.each do |co|
+            - @primary_tech_co.each do |co|
                 %li 
                     = link_to co.name, co
-    - if @primary_tech
+    - if @similar_size_co
         %h1 Companies of a similar size:
         %ul
-            - Company.all.select {|co| (Math.log(co.size) - Math.log(@company.size)).abs <= 0.3}.each do |co|
+            - @similar_size_co.each do |co|
                 %li 
                     = link_to co.name, co
-
+    - if @owner_co
+        %h1 Companies with shared management:
+        %ul
+            - @owner_co.each do |co|
+                %li 
+                    = link_to co.name, co
 
 :javascript
     var map = L.mapbox.map('map', 'examples.h186knp8').setView([-33.93, 18.42], 15);
@@ -95,8 +100,8 @@
 
     ) ).addTo(map);
 
-	map.panTo(marker._latlng)
+    map.panTo(marker._latlng)
 
-	map.touchZoom.disable();
-	map.doubleClickZoom.disable();
-	map.scrollWheelZoom.disable();
+    map.touchZoom.disable();
+    map.doubleClickZoom.disable();
+    map.scrollWheelZoom.disable();

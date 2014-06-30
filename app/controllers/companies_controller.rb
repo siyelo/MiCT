@@ -15,11 +15,13 @@ class CompaniesController < ApplicationController
 
     #------similar companies------
     # share the same main programming language
-    # similar = @company.technologies.first.companies
-    # similar size
-    # @similar = similar.select {|co| (Math.log(co.size) - Math.log(@company.size)).abs <= 0.25}
+    @primary_tech_co = @company.technologies.first.companies.take(3)
 
-    @primary_tech = @company.technologies.first
+    # similar size
+    @similar_size_co = Company.all.select {|co| (Math.log(co.size) - Math.log(@company.size)).abs <= 0.25}.take(3)
+
+    # shared owner
+    @owner_co = Company.where(user_id: @company.user_id).take(3)
 
   end
 
