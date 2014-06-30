@@ -15,29 +15,28 @@
 			%img.prof(src="#{@company.avatar.url}")
 			%h1= @company.name
 			company type
-		%br
 		.description= @company.info
-		%br
-		%br
-
-		%row
-			.col
 
 		%ul.basic-info
 			%li
 				%img.logo{src: @company.avatar.url(:thumb)}
+				// ICON
 				.text= @company.website
 			%li
 				%img.logo{src: @company.avatar.url(:thumb)}
+				// ICON
 				.text= @company.email
 			%li
 				%img.logo{src: @company.avatar.url(:thumb)}
+				// ICON
 				.text= @company.phone
 			%li
 				%img.logo{src: @company.avatar.url(:thumb)}
+				// ICON
 				.text= @company.hours
 			%li
 				%img.logo{src: @company.avatar.url(:thumb)}
+				// ICON
 				.text= @company.size
 
 		%hr
@@ -51,17 +50,6 @@
 			%a{href: "#similar"} Similar Companies
 
 #map{frameborder: "0", style: "border:0; height:500px;", width: "100%"}
-/ %table.map-images
-/ 	%tr
-/ 		%td 
-/ 			%img{src: "http://i283.photobucket.com/albums/kk307/malmal718/backgrounds-3.jpg"}
-/ 		%td
-/ 			%img{src: "http://i283.photobucket.com/albums/kk307/malmal718/backgrounds-3.jpg"}
-/ 	%tr
-/ 		%td
-/ 			%img{src: "http://i283.photobucket.com/albums/kk307/malmal718/backgrounds-3.jpg"}
-/ 		%td
-/ 			%img{src: "http://i283.photobucket.com/albums/kk307/malmal718/backgrounds-3.jpg"}
 
 #about.info.profile
 	%h1 About
