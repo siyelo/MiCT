@@ -1,11 +1,26 @@
 .sign{style: "height:200%; background: url(/assets/capetown_3.jpg)"}
     .sign-box
         %h1 Basic information
-        = render 'form'
-        %br
-        %br
-        %h1 Profile information
-        = form_for @company do |f|
+        = form_for @company, {name: "form1"} do |f|
+            %ul
+                %li
+                    = f.text_field(:name, placeholder: "Name")
+                %li
+                    = f.number_field(:size, placeholder: "Size")
+                %li
+                    = f.file_field(:avatar, placeholder: "Upload Logo")
+                %li
+                    = f.radio_button(:status, "Hiring")
+                    = f.label(:status, "Hiring", placeholder: "")
+                %li
+                    = f.radio_button(:status, "Seeking funding")
+                    = f.label(:status, "Seeking funding", placeholder: "")
+                %li
+                    %input#location.textbox{name: "company[location]", type: "text", value: ""}/
+                    = f.hidden_field :latitude
+                    = f.hidden_field :longitude
+                %li
+            %h1 Profile information
             %ul
                 %li
                     = f.label(:website, "Website: ")
@@ -19,30 +34,67 @@
                 %li
                     = f.label(:hours, "Hours: ")
                     = f.text_field(:hours)
-                %li
-                    = f.submit("Save", class: "button") 
-        %br
-        %br
-        %h1 Description
-        = form_for @company do |f|
+            %h1 Description
             %ul
                 %li
                     = f.label(:info, "About: ")
-                    %br
                     = f.text_area(:info, style: "width:100%; height:200px;")
-            %ul
                 %li
                     = f.label(:technology_ids, "Technologies: ")
-                    %br
-                    = f.select(:technology_ids, options_from_collection_for_select(Technologies.all, "id", "name"),{:include_blank => true}, multiple: true, style: "width:100%;", id: "select2")
-            %ul
+                    = f.collection_select :technology_ids, Technology.all, :id, :name, {:include_blank => true}, multiple: true, style: "width:100%;", id: "select2"
                 %li
                     = f.submit("Save", class: "button")
-        %br
         = link_to 'Back', @company
 
 :javascript
-    $(document).ready(function() { $("#select2").select2( {
-          allowClear: true,
-          placeholder: '#{@company.technologies}'
-    }); });
+    $(document).ready(function() { $("#select2").select2() });
+
+:javascript
+    //Autocomplete variables
+    var input = document.getElementById('location');
+    var searchform = document.getElementById('form1');
+    var place;
+    var autocomplete = new google.maps.places.Autocomplete(input);
+
+    //Google Map variables
+    var map;
+    var marker;
+
+    //Add listener to detect autocomplete selection
+    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        place = autocomplete.getPlace();
+        //console.log(place);
+    });
+
+    //Add listener to search
+    // searchform.addEventListener("submit", function() {
+    //  var newlatlong = new google.maps.LatLng(place.geometry.location.lat(),place.geometry.location.lng());
+    //  map.setCenter(newlatlong);
+    //  marker.setPosition(newlatlong);
+    //  map.setZoom(12);
+
+    // });
+     
+    //Reset the inpout box on click
+    input.addEventListener('click', function(){
+        input.value = "";
+    });
+
+
+
+    function initialize() {
+        var myLatlng = new google.maps.LatLng(51.517503,-0.133896);
+        var mapOptions = {
+        zoom: 1,
+        center: myLatlng
+        }
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+        marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            title: 'Main map'
+        });
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);

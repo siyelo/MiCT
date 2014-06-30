@@ -1,4 +1,4 @@
-%section.listing
+%section
 	.notice= flash[:success]
 	.notice= flash[:error]
 
@@ -7,11 +7,11 @@
 	/ = select_tag('search_t', options_from_collection_for_select(Technology.all, "id", "name"), multiple: true, class: "select2")
 
 	= search_form_for @q do |f|
-		= f.label :name_cont, "Name contains"
+		= f.label :name_cont, "Name contains: "
 		= f.text_field :name_cont
-		= f.label :size_gteq, "Size is greater than "
+		= f.label :size_gteq, "Size is greater than: "
 		= f.text_field :size_gteq
-		= f.label :size_lteq, "Size is less than "
+		= f.label :size_lteq, "Size is less than: "
 		= f.text_field :size_lteq
 		= f.submit
 
@@ -24,6 +24,7 @@
 
 	var myLayer = null;
 
+	// search
 	$('#company_search').on('submit', function(e) {
 		e.preventDefault();
 
@@ -32,6 +33,7 @@
 				// once the data has been fetched
 
 				// clear all markers
+				myLayer.clearLayers();
 
 				// add markers from data (if there are any?)
 				placeMarkers(myLayer, data);

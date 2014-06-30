@@ -1,36 +1,43 @@
 .notice= flash[:success]
 .notice= flash[:error]
 
+:css
+	.header{background-image: url("")}
+
+%nav
+
 - if user_signed_in? && (current_user.id == @company.user_id)
     = link_to "Edit Profile", edit_company_path
 
 %section.profile
-    .header.info
-        .prof-head
-            %img.prof(src="#{@company.avatar.url}")
-            %h1= @company.name
-            company type
-        %br
-        .description= @company.info
-        %br
-        %br
+	.header.info
+		.prof-head
+			%img.prof(src="#{@company.avatar.url}")
+			%h1= @company.name
+			company type
+		.description= @company.info
 
-        %ul.basic-info
-            %li
-                %img.logo{src: @company.avatar.url(:thumb)}
-                .text= @company.website
-            %li
-                %img.logo{src: @company.avatar.url(:thumb)}
-                .text= @company.email
-            %li
-                %img.logo{src: @company.avatar.url(:thumb)}
-                .text= @company.phone
-            %li
-                %img.logo{src: @company.avatar.url(:thumb)}
-                .text= @company.hours
-            %li
-                %img.logo{src: @company.avatar.url(:thumb)}
-                .text= @company.size
+		%ul.basic-info
+			%li
+				%img.logo{src: @company.avatar.url(:thumb)}
+				// ICON
+				.text= @company.website
+			%li
+				%img.logo{src: @company.avatar.url(:thumb)}
+				// ICON
+				.text= @company.email
+			%li
+				%img.logo{src: @company.avatar.url(:thumb)}
+				// ICON
+				.text= @company.phone
+			%li
+				%img.logo{src: @company.avatar.url(:thumb)}
+				// ICON
+				.text= @company.hours
+			%li
+				%img.logo{src: @company.avatar.url(:thumb)}
+				// ICON
+				.text= @company.size
 
         %hr
         %nav
@@ -43,6 +50,7 @@
             %a{href: "#similar"} Similar Companies
 
 #map{frameborder: "0", style: "border:0; height:500px;", width: "100%"}
+
 / %table.map-images
 /   %tr
 /       %td 
@@ -79,6 +87,7 @@
                 %li 
                     = link_to co.name, co
 
+
 :javascript
     var map = L.mapbox.map('map', 'examples.h186knp8').setView([-33.93, 18.42], 15);
 
@@ -86,9 +95,8 @@
 
     ) ).addTo(map);
 
-    map.panTo(marker._latlng)
-    map.dragging.disable();
-    map.touchZoom.disable();
-    map.doubleClickZoom.disable();
-    map.scrollWheelZoom.disable();
+	map.panTo(marker._latlng)
 
+	map.touchZoom.disable();
+	map.doubleClickZoom.disable();
+	map.scrollWheelZoom.disable();

@@ -7,8 +7,7 @@ class CompaniesController < ApplicationController
     #@companies = Company.where("name like ? or status like ?", q, q)
     
     @q = Company.ransack(params[:q])
-    @companies = @q.result.limit(20).(distinct: true)
-
+    @companies = @q.result
   end
 
   def show
@@ -71,7 +70,7 @@ class CompaniesController < ApplicationController
 
   private
   def company_params
-    params.require(:company).permit(:technologies_ids, :name, :size, :avatar, :location, :status, :latitude, :longitude, :phone, :email, :website, :hours)
+    params.require(:company).permit(:name, :size, :avatar, :location, :status, :latitude, :longitude, :phone, :email, :website, :hours, :info, technology_ids: [])
   end
 
   def authorize_user
