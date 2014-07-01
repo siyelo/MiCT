@@ -8,10 +8,6 @@
 				%ol
 					- current_user.companies.each do |c|
 						%li= link_to c.name, "/companies/#{c.id}"
-					
-
-	/ = select_tag('search_t', options_from_collection_for_select(Technology.all, "id", "name"), multiple: true, class: "select2")
-
 	%div#search
 		= search_form_for @q do |f|
 			/ = f.label :name_cont, ""
@@ -21,6 +17,15 @@
 			/ = f.label :size_lteq, "Size is less than: "
 			/ = f.text_field :size_lteq
 			= f.submit
+		%form{name: "testform"}
+			%input{name: "check1", onclick: "testButton(this.form)", type: "checkbox", value: "Check1"}
+			Checkbox 1
+			%input{name: "check2", onclick: "testButton(this.form)", type: "checkbox", value: "Check2"}
+			%input{name: "check3", onclick: "testButton(this.form)", type: "checkbox", value: "Check3"}	
+		:javascript
+			function testButton (form){
+				alert (form.check1.checked);
+			}
 
 %section.map#map
 

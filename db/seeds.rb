@@ -29,3 +29,7 @@ c4.save!
 ["Ruby", "Rails", "Java", "Python", "jQuery", "C", "C++", "Ocaml", "Swift"].each {|name|
 	Technology.create(name: name)
 }
+
+["Information", "Social Media", "Consulting", "Finance", "Web", "Applications", "Gaming", "Virtual Reality", "Education"].each {|name|
+	Tag.create(name: name)
+}

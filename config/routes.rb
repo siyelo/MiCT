@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   #   end
   # end
 
+  get 'companies/test' => 'companies#test'
+
   devise_for :users
 
   resources :companies, only: [:index, :show, :new, :create, :edit, :update, :destroy]
@@ -17,7 +19,7 @@ Rails.application.routes.draw do
 
   post 'companies/index' => 'companies#index'
   root 'companies#index'
-  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
