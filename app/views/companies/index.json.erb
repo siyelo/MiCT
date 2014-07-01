@@ -6,7 +6,7 @@
     coordinates: [company.longitude, company.latitude]
   },
   properties: {
-    title: "<div><img class='result logo' src='#{company.avatar.url}'><h3>#{company.name}</h3></div>",
+    title: "<div><img class='result logo' src='#{company.avatar.url(:thumb)}'><h3>#{company.name}</h3></div>",
     description: "<ul><li>#{company.get_techs}.</li><li>#{company.location}</li></ul>",
     "marker-id" => "marker-1",
     "marker-color" => "#f86767",

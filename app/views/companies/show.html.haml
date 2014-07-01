@@ -12,32 +12,40 @@
 %section.profile
 	.header.info
 		.prof-head
-			%img.prof(src="#{@company.avatar.url}")
+			%img.prof(src="#{@company.avatar.url(:medium)}")
 			%h1= @company.name
 			company type
 		.description= @company.info
 
-		%ul.basic-info
-			%li
-				%img.logo{src: @company.avatar.url(:thumb)}
-				// ICON
-				.text= @company.website
-			%li
-				%img.logo{src: @company.avatar.url(:thumb)}
-				// ICON
-				.text= @company.email
-			%li
-				%img.logo{src: @company.avatar.url(:thumb)}
-				// ICON
-				.text= @company.phone
-			%li
-				%img.logo{src: @company.avatar.url(:thumb)}
-				// ICON
-				.text= @company.hours
-			%li
-				%img.logo{src: @company.avatar.url(:thumb)}
-				// ICON
-				.text= @company.size
+		%table.basic-info
+			%thead
+				%tr
+					%th
+						%img.logo{src: @company.avatar.url(:thumb)}
+						// ICON
+						.text= @company.website
+					%th
+						%img.logo{src: @company.avatar.url(:thumb)}
+						// ICON
+						.text= @company.email
+					%th
+						%img.logo{src: @company.avatar.url(:thumb)}
+						// ICON
+						.text= @company.phone
+					%th
+						%img.logo{src: @company.avatar.url(:thumb)}
+						// ICON
+						.text= @company.hours
+					%th
+						%img.logo{src: @company.avatar.url(:thumb)}
+						// ICON
+						.text= @company.size
+			%tbody
+				%tr
+				%tr
+				%tr
+				%tr
+				%tr
 
 		%hr
 		%nav
