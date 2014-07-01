@@ -7,7 +7,7 @@
 %nav
 
 - if user_signed_in? && (current_user.id == @company.user_id)
-	= link_to "Edit Profile", edit_company_path
+    = link_to "Edit Profile", edit_company_path
 
 %section.profile
 	.header.info
@@ -71,13 +71,13 @@
 /           %img{src: "http://i283.photobucket.com/albums/kk307/malmal718/backgrounds-3.jpg"}
 
 #about.info.profile
-	%h1 About
-	
+    %h1 About
+    
 #tech.info
-	%h1 Technologies
-	%ul
-	- @company.technologies.each do |t|
-		%li #{t.name}
+    %h1 Technologies
+    %ul
+    - @company.technologies.each do |t|
+        %li #{t.name}
 
 #similar.info
     %h1 Similar Companies
@@ -102,11 +102,11 @@
 
 
 :javascript
-	var map = L.mapbox.map('map', 'examples.h186knp8').setView([-33.93, 18.42], 15);
+    var map = L.mapbox.map('map', 'examples.h186knp8').setView([-33.93, 18.42], 15);
 
-	var marker = L.marker([#{@company.latitude}, #{@company.longitude}], L.Icon(    
+    var marker = L.marker([#{@company.latitude}, #{@company.longitude}], L.Icon(    
 
-	) ).addTo(map);
+    ) ).addTo(map);
 
     map.panTo(marker._latlng)
 

@@ -8,6 +8,8 @@ class CompaniesController < ApplicationController
     
     @q = Company.ransack(params[:q])
     @companies = @q.result
+    @tags = Tag.all
+    @technologies = Technology.all
   end
 
   def show

@@ -26,6 +26,14 @@
 			function testButton (form){
 				alert (form.check1.checked);
 			}
+	    %form{name: "testform"}
+	        = select_tag "tags", options_from_collection_for_select(@tags, "id", "name"), multiple: true, class: "select2", onclick: "filterButton(this.form)"
+	        
+		:javascript
+		    function filterButton (form){
+		        var mySelect = document.getElementById("tags"); 
+		        alert(mySelect.options[mySelect.selectedIndex].value); 
+		    }
 
 %section.map#map
 
@@ -88,13 +96,13 @@
 		// a marker that's associated to the marker item.
 		layer.eachLayer(function(marker) {
 
-		itemName = marker.feature.properties.title +
-		  '' + marker.feature.properties.additional + '';
+        itemName = marker.feature.properties.title +
+          '' + marker.feature.properties.additional + '';
 
-		itemMarker = marker.feature.properties.title +
-		  '' + marker.feature.properties.description + '';
+        itemMarker = marker.feature.properties.title +
+          '' + marker.feature.properties.description + '';
 
-		info.append(
+        info.append(
 
 			$("<li class='item'>" + itemName + "</li>").on('mouseover', function(e) {
 
@@ -108,12 +116,12 @@
 
 			})
 
-		);
-		marker.bindPopup(itemMarker,{
-			width: 320,
-			height: 320
-		});	
-		});
+        );
+        marker.bindPopup(itemMarker,{
+            width: 320,
+            height: 320
+        }); 
+        });
 
 	};
 	myLayer = L.mapbox.featureLayer().addTo(map);
