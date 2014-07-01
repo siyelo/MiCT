@@ -90,9 +90,13 @@
         // a marker that's associated to the marker item.
         layer.eachLayer(function(marker) {
 
-        itemName = marker.feature.properties.title +
-          '' + marker.feature.properties.additional + '';
-        info.append(
+		itemName = marker.feature.properties.title +
+		  '' + marker.feature.properties.additional + '';
+
+		itemMarker = marker.feature.properties.title +
+		  '' + marker.feature.properties.description + '';
+
+		info.append(
 
             $("<li class='item'>" + itemName + "</li>").on('mouseover', function(e) {
 
@@ -106,9 +110,12 @@
 
             })
 
-        );
-
-        });
+		);
+		marker.bindPopup(itemMarker,{
+			width: 320,
+			height: 320
+		});	
+		});
 
     };
     myLayer = L.mapbox.featureLayer().addTo(map);

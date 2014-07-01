@@ -6,11 +6,12 @@
     coordinates: [company.longitude, company.latitude]
   },
   properties: {
-    title: "<img class='result logo' src='#{company.avatar.url}'><h3>#{company.name}</h3>",
-    description: "#{company.location}",
+    title: "<div><img class='result logo' src='#{company.avatar.url}'><h3>#{company.name}</h3></div>",
+    description: "<ul><li>#{company.get_techs}.</li><li>#{company.location}</li></ul>",
     "marker-id" => "marker-1",
     "marker-color" => "#f86767",
-    additional: "#{company.size} employees. Currently #{company.status.downcase}.<a style='float:right; padding-right:20px;' href='/companies/#{company.id}' target='_blank'>View profile</a>"
+    "marker-size" => "large",
+    additional: "<ul style='line-height:initial;padding-top:10px;'><li>#{company.get_techs}.</li><li>#{company.size} employees. Currently #{company.status.downcase}.<a style='float:right; padding-right:20px;' href='/companies/#{company.id}' target='_blank'>View profile</a></li><li>#{company.location}</li>"
   }
 } 
 }.to_json) %>

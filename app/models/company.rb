@@ -13,11 +13,15 @@ class Company < ActiveRecord::Base
 	# end
 
 	def get_techs
-		arr = ""
-		self.technologies.each do |t|
-			arr + t.name
+		if self.technologies.length > 2
+		self.technologies.collect { |w| w.name }.join(", ").split(" ").insert(-2, "and").join(" ")
+		elsif self.technologies.length == 2
+		self.technologies.collect { |w| w.name }.insert(-2, "and").join(" ")
+		elsif self.technologies.length == 1
+		self.technologies.collect { |w| w.name }.join()
+		else
+			"Technologies not specified"
 		end
-		arr
 	end
 
 	validates :name, presence: true
