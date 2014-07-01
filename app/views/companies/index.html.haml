@@ -2,8 +2,13 @@
 	%ul.listing#info
 		.notice= flash[:success]
 		.notice= flash[:error]
-		- if current_user.companies != nil
-			%p= current_user.name 
+		-if current_user != nil	
+			- if current_user.companies != nil
+				%p= "Welcome #{current_user.name}, you own the listing for:"
+				%ol
+					- current_user.companies.each do |c|
+						%li= link_to c.name, "/companies/#{c.id}"
+					
 
 	/ = select_tag('search_t', options_from_collection_for_select(Technology.all, "id", "name"), multiple: true, class: "select2")
 
@@ -79,6 +84,10 @@
 
 		itemName = marker.feature.properties.title +
 		  '' + marker.feature.properties.additional + '';
+
+		itemMarker = marker.feature.properties.title +
+		  '' + marker.feature.properties.description + '';
+
 		info.append(
 
 			$("<li class='item'>" + itemName + "</li>").on('mouseover', function(e) {
@@ -94,7 +103,10 @@
 			})
 
 		);
-
+		marker.bindPopup(itemMarker,{
+			width: 320,
+			height: 320
+		});	
 		});
 
 	};
