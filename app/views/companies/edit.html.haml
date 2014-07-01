@@ -41,13 +41,16 @@
                     = f.text_area(:info, style: "width:100%; height:200px;")
                 %li
                     = f.label(:technology_ids, "Technologies: ")
-                    = f.collection_select :technology_ids, Technology.all, :id, :name, {:include_blank => true}, multiple: true, style: "width:100%;", id: "select2"
+                    = f.collection_select :technology_ids, Technology.all, :id, :name, {:include_blank => true}, multiple: true, style: "width:100%;", class: "select2"
+                %li
+                    = f.label(:tag_ids, "Tags: ")
+                    = f.collection_select :tag_ids, Tag.all, :id, :name, {:include_blank => true}, multiple: true, style: "width:100%;", class: "select2"
                 %li
                     = f.submit("Save", class: "button")
         = link_to 'Back', @company
 
 :javascript
-    $(document).ready(function() { $("#select2").select2() });
+    $(document).ready(function() { $(".select2").select2() });
 
 :javascript
     //Autocomplete variables
@@ -79,7 +82,6 @@
     input.addEventListener('click', function(){
         input.value = "";
     });
-
 
 
     function initialize() {

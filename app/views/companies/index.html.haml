@@ -1,114 +1,127 @@
 %section#parent
-	%ul.listing#info
-		.notice= flash[:success]
-		.notice= flash[:error]
-		- if current_user.companies != nil
-			%p= current_user.name 
+    %ul.listing#info
+        .notice= flash[:success]
+        .notice= flash[:error]
+        - if current_user.companies != nil
+            %p= current_user.name 
 
-	/ = select_tag('search_t', options_from_collection_for_select(Technology.all, "id", "name"), multiple: true, class: "select2")
+    = search_form_for @q do |f|
+        = f.label :name_cont, "Name contains: "
+        = f.text_field :name_cont
+        = f.label :size_gteq, "Size is greater than: "
+        = f.text_field :size_gteq
+        = f.label :size_lteq, "Size is less than: "
+        = f.text_field :size_lteq
+        = f.label :info_cont, "Description contains: "
+        = f.text_field :info_cont
+        = f.submit
 
-	= search_form_for @q do |f|
-		= f.label :name_cont, "Name contains: "
-		= f.text_field :name_cont
-		= f.label :size_gteq, "Size is greater than: "
-		= f.text_field :size_gteq
-		= f.label :size_lteq, "Size is less than: "
-		= f.text_field :size_lteq
-		= f.submit
 
+    %form{name: "testform"}
+        %input{name: "check1", onclick: "testButton(this.form)", type: "checkbox", value: "Check1"}
+        Checkbox 1
+        %input{name: "check2", onclick: "testButton(this.form)", type: "checkbox", value: "Check2"}
+        %input{name: "check3", onclick: "testButton(this.form)", type: "checkbox", value: "Check3"}
+        
+:javascript
+    function testButton (form){
+        alert (form.check1.checked);
+    }
+
+        
 %section.map#map
 
 :javascript
 
-	var map = L.mapbox.map('map', 'examples.h186knp8').setView([-33.93, 18.42], 10);
-	
+    var map = L.mapbox.map('map', 'examples.h186knp8').setView([-33.93, 18.42], 10);
+    
 
-	var myLayer = null;
+    var myLayer = null;
 
-	// search
-	$('#company_search').on('submit', function(e) {
-		e.preventDefault();
+    // search
+    $('#company_search').on('submit', function(e) {
+        e.preventDefault();
 
-		fetchMarkers({
-			onComplete: function(data) {
-				// once the data has been fetched
+        fetchMarkers({
+            onComplete: function(data) {
+                // once the data has been fetched
 
-				// clear all markers
-				$('ul#info li').remove()
+                // clear all markers
+                $('ul#info li').remove()
 
-				// add markers from data (if there are any?)
-				placeMarkers(myLayer, data);
+                // add markers from data (if there are any?)
+                placeMarkers(myLayer, data);
 
-				if (data.length > 0) {
-					setTimeout( function() {
-					map.fitBounds(myLayer.getBounds());
-					}, 50);
-					setTimeout( function() {
-					$( "li.item" ).first().mouseover();
-					}, 600);
-				}
-			},
-			data: $('#company_search').serialize()
-		});
-	});
-
-
-	var fetchMarkers = function(args) {
-		$.ajax({
-			type: "GET",
-			data: args.data,
-			url: "/companies",
-			dataType: "json",
-			success: args.onComplete
-		});
+                if (data.length > 0) {
+                    setTimeout( function() {
+                    map.fitBounds(myLayer.getBounds());
+                    }, 50);
+                    setTimeout( function() {
+                    $( "li.item" ).first().mouseover();
+                    }, 600);
+                }
+            },
+            data: $('#company_search').serialize()
+        });
+    });
 
 
-	};
+    var fetchMarkers = function(args) {
+        $.ajax({
+            type: "GET",
+            data: args.data,
+            url: "/companies",
+            dataType: "json",
+            success: args.onComplete
+        });
 
-	var placeMarkers = function(layer, data) {
 
-		layer.setGeoJSON(data);
+    };
 
-		var info = document.getElementById('info');
-		var info = $('ul#info')
+    var placeMarkers = function(layer, data) {
 
-		// Iterate through each feature layer item, build a
-		// marker menu item and enable a click event that pans to + opens
-		// a marker that's associated to the marker item.
-		layer.eachLayer(function(marker) {
+        layer.setGeoJSON(data);
 
-		itemName = marker.feature.properties.title +
-		  '' + marker.feature.properties.additional + '';
-		info.append(
+        var info = document.getElementById('info');
+        var info = $('ul#info')
 
-			$("<li class='item'>" + itemName + "</li>").on('mouseover', function(e) {
+        // Iterate through each feature layer item, build a
+        // marker menu item and enable a click event that pans to + opens
+        // a marker that's associated to the marker item.
+        layer.eachLayer(function(marker) {
 
-			  $('ul#info li').removeClass('active');
-			  $(e.target).addClass('active');
+        itemName = marker.feature.properties.title +
+          '' + marker.feature.properties.additional + '';
+        info.append(
 
-				// When a menu item is clicked, animate the map to center
-				// its associated marker and open its popup.
-				
-				marker.openPopup();
+            $("<li class='item'>" + itemName + "</li>").on('mouseover', function(e) {
 
-			})
+              $('ul#info li').removeClass('active');
+              $(e.target).addClass('active');
 
-		);
+                // When a menu item is clicked, animate the map to center
+                // its associated marker and open its popup.
+                
+                marker.openPopup();
 
-		});
+            })
 
-	};
-	myLayer = L.mapbox.featureLayer().addTo(map);
+        );
 
-	fetchMarkers({
-		onComplete: function(data) {
-			placeMarkers(myLayer, data);
-			setTimeout( function() {
-			map.fitBounds(myLayer.getBounds());
-			}, 50);
+        });
 
-		}
-	});
+    };
+    myLayer = L.mapbox.featureLayer().addTo(map);
+
+    fetchMarkers({
+        onComplete: function(data) {
+            placeMarkers(myLayer, data);
+            setTimeout( function() {
+            map.fitBounds(myLayer.getBounds());
+            }, 50);
+
+        }
+    });
 
 
 

@@ -1,6 +1,7 @@
 class Company < ActiveRecord::Base
 	belongs_to :user
 	has_and_belongs_to_many :technologies
+	has_and_belongs_to_many :tags
 
 	# def self.search(search)
 	#   if search

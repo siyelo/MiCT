@@ -29,6 +29,9 @@ class CompaniesController < ApplicationController
     @company = Company.new
   end
 
+  def test
+  end
+
   def create
   	@company = Company.new(company_params)
 
