@@ -2,6 +2,17 @@
 	.listing
 		%h1#logo
 			= link_to "Made in Cape Town", "/"
+
+		%div#search
+			= search_form_for @q do |f|
+				/ = f.label :name_cont, ""
+				= f.text_field :name_cont, placeholder: "Search..."
+				/ = f.label :size_gteq, "Size is greater than: "
+				/ = f.text_field :size_gteq
+				/ = f.label :size_lteq, "Size is less than: "
+				/ = f.text_field :size_lteq
+				= f.submit
+
 	%nav#main-nav
 		%ul
 			%li
