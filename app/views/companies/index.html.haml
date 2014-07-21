@@ -1,5 +1,5 @@
-%section#parent
-	%ul.listing#info
+%section#parent.listing
+	%ul#info
 		.notice= flash[:success]
 		.notice= flash[:error]
 		-if current_user != nil	
@@ -8,30 +8,36 @@
 				%ol
 					- current_user.companies.each do |c|
 						%li= link_to c.name, "/companies/#{c.id}"
-	%div#search
-		= search_form_for @q do |f|
-			/ = f.label :name_cont, ""
-			= f.text_field :name_cont, placeholder: "Search...", style: "width:300px;"
-			/ = f.label :size_gteq, "Size is greater than: "
-			/ = f.text_field :size_gteq
-			/ = f.label :size_lteq, "Size is less than: "
-			/ = f.text_field :size_lteq
-			= f.submit
-		
-			%br
-			= select_tag :has_tags, options_from_collection_for_select(@tags, "name", "name"), {:include_blank => true, multiple: true, class: "select2", style: "width:500px;", onclick:"filterButton(this.form)", placeholder: "Select tags..."}
+%div#search
+	= search_form_for @q do |f|
+		/ = f.label :name_cont, ""
+		= f.text_field :name_cont, placeholder: "Search...", style: "width:300px;"
+		/ = f.label :size_gteq, "Size is greater than: "
+		/ = f.text_field :size_gteq
+		/ = f.label :size_lteq, "Size is less than: "
+		/ = f.text_field :size_lteq
+		= f.submit
+		%br
+		= select_tag :has_tags, options_from_collection_for_select(@tags, "name", "name"), {:include_blank => true, multiple: true, class: "select2", style: "width:500px;", onclick:"filterButton(this.form)", placeholder: "Select tags..."}
 
+/ %form{name: "testform"}
+/ 	%input{name: "check1", onclick: "testButton(this.form)", type: "checkbox", value: "Check1"}
+/ 	Checkbox 1
+/ 	%input{name: "check2", onclick: "testButton(this.form)", type: "checkbox", value: "Check2"}
+/ 	%input{name: "check3", onclick: "testButton(this.form)", type: "checkbox", value: "Check3"}	
+/ :javascript
+/ 	function testButton (form){
+/ 		alert (form.check1.checked);
+/ 	}
 
-		/ %form{name: "testform"}
-		/ 	%input{name: "check1", onclick: "testButton(this.form)", type: "checkbox", value: "Check1"}
-		/ 	Checkbox 1
-		/ 	%input{name: "check2", onclick: "testButton(this.form)", type: "checkbox", value: "Check2"}
-		/ 	%input{name: "check3", onclick: "testButton(this.form)", type: "checkbox", value: "Check3"}	
-		/ :javascript
-		/ 	function testButton (form){
-		/ 		alert (form.check1.checked);
-		/ 	}
-			
+/ %form{name: "testform"}
+/ 	= select_tag "tags", options_from_collection_for_select(@tags, "id", "name"), multiple: true, class: "select2", onclick: "filterButton(this.form)"
+	
+/ :javascript
+/ 	function filterButton (form){
+/ 		alert($('#tags').val()
+/ 	}
+
 %section.map#map
 
 :javascript
