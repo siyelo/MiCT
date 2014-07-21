@@ -5,7 +5,6 @@ class CompaniesController < ApplicationController
   def index
     #q = "'%#{params[:search_term]}%'"
     #@companies = Company.where("name like ? or status like ?", q, q)
-    
     @q = Company.ransack(params[:q])
     @companies = @q.result
     @tags = Tag.all
@@ -17,7 +16,7 @@ class CompaniesController < ApplicationController
 
     #------similar companies------
     # share the same main programming language
-    @primary_tech_co = @company.technologies.first.companies.take(3)
+    @primary_tech_co = @company.technologies.first.companies.take(3) rescue nil
 
     # similar size
     @similar_size_co = Company.all.select {|co| (Math.log(co.size) - Math.log(@company.size)).abs <= 0.25}.take(3)
@@ -77,7 +76,7 @@ class CompaniesController < ApplicationController
 
   private
   def company_params
-    params.require(:company).permit(:name, :size, :avatar, :location, :status, :latitude, :longitude, :phone, :email, :website, :hours, :info, technology_ids: [])
+    params.require(:company).permit(:name, :size, :avatar, :location, :status, :latitude, :longitude, :phone, :email, :website, :hours, :info, technology_ids: [], tag_ids: [])
   end
 
   def authorize_user

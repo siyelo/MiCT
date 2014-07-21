@@ -42,7 +42,7 @@ gem 'spring',        group: :development
 gem 'rmagick'
 
 #Ransack search
-gem 'ransack'
+gem 'ransack', github: "activerecord-hackery/ransack"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -3,6 +3,22 @@ class Company < ActiveRecord::Base
 	has_and_belongs_to_many :technologies
 	has_and_belongs_to_many :tags
 
+	def self.ransackable_scopes(auth=nil)
+		[:has_tags]
+	end
+
+	scope :has_tags, -> (*tags) {
+		# need to reject blanks because of collection_select bug with hidden input sending an empty element
+		# http://stackoverflow.com/questions/8929230/why-is-the-first-element-always-blank-in-my-rails-multi-select-using-an-embedde
+		where(tags.flatten.map { |tag|
+		  "id  IN (
+		        SELECT company_id FROM companies_tags 
+		        JOIN tags ON companies_tags.tag_id = tags.id
+		        AND tags.name = '#{tag}'
+		    )"
+		}.join(" AND "))
+	}
+
 	# def self.search(search)
 	#   if search
 	#     q = "%#{search}%"
