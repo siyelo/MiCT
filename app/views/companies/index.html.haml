@@ -19,6 +19,7 @@
 		= f.submit
 		%br
 		= select_tag :has_tags, options_from_collection_for_select(@tags, "name", "name"), {:include_blank => true, multiple: true, class: "select2", style: "width:500px;", onclick:"filterButton(this.form)", placeholder: "Select tags..."}
+		%br
 
 / %form{name: "testform"}
 / 	%input{name: "check1", onclick: "testButton(this.form)", type: "checkbox", value: "Check1"}

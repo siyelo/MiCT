@@ -50,7 +50,7 @@
     
 #     # Iterate through each feature layer item, build a
 #     # marker menu item and enable a click event that pans to + opens
-#     # a marker that's associated to the marker item.
+#     # a marker that is associated to the marker item.
 #     layer.eachLayer (marker) ->
 #       itemName = marker.feature.properties.title + "" + marker.feature.properties.additional + ""
 #       itemMarker = marker.feature.properties.title + "" + marker.feature.properties.description + ""
@@ -125,7 +125,7 @@
   
 #   # Iterate through each feature layer item, build a
 #   # marker menu item and enable a click event that pans to + opens
-#   # a marker that's associated to the marker item.
+#   # a marker that is associated to the marker item.
 #   layer.eachLayer (marker) ->
 #     itemName = marker.feature.properties.title + "" + marker.feature.properties.additional + ""
 #     itemMarker = marker.feature.properties.title + "" + marker.feature.properties.description + ""
