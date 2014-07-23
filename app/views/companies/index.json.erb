@@ -6,7 +6,8 @@
     coordinates: [company.longitude, company.latitude]
   },
   properties: {
-    title: "<div><img class='result logo' src='#{company.avatar.url(:thumb)}'><h3>#{company.name}</h3></div>",
+    title: "<div><img class='result logo' src='#{company.avatar.url(:thumb)}'><h3>#{company.name} </h3></div>",
+    window: "<div><h3><a href='/companies/#{company.id}' target='_blank'><img class='result logo' src='#{company.avatar.url(:thumb)}'><br/>#{company.name}</a>  </h3></div>",
     description: "<ul><li>#{company.get_techs}.</li><li>#{company.location}</li></ul>",
     "marker-id" => "marker-1",
     "marker-color" => "#f86767",
@@ -15,3 +16,4 @@
   }
 } 
 }.to_json) %>
+

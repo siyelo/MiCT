@@ -19,7 +19,7 @@ c2.avatar = File.open('app/assets/images/seeds/url.jpg')
 c2.save!
 
 c3 = Company.create(name: "Platform 45", user_id: User.first.id, phone: "123-456-7890", size: 18, status: "Hiring", location: "82 Roeland Street, Cape Town, South Africa", latitude: -33.9295489, longitude: 19.4222019)
-c3.avatar = File.open('app/assets/images/seeds/siyelo.png')
+c3.avatar = File.open('app/assets/images/seeds/platform45.png')
 c3.save!
 
 c4 = Company.create(name: "Facebook", user_id: User.second.id, phone: "123-456-7890", size: 19, status: "Hiring", location: "62 Roeland Street, Cape Town, South Africa", latitude: -33.9295489, longitude: 19.4222019)
@@ -39,11 +39,11 @@ c7.avatar = File.open('app/assets/images/seeds/siyelo.png')
 c7.save!
 
 c8 = Company.create(name: "Imbali Studio", user_id: User.second.id, phone: "123-456-7890", size: 20, status: "Hiring", location: "7 Wale St, Cape Town,South Africa", latitude: -33.924320, longitude: 18.418715)
-c8.avatar = File.open('app/assets/images/seeds/imablistudio.png')
+c8.avatar = File.open('app/assets/images/seeds/imbalistudio.png')
 c8.save!
 
 c9 = Company.create(name: "Liquid Thought", user_id: User.second.id, phone: "123-456-7890", size: 22, status: "Hiring", location: "26A Shortmarket St, Cape Town, South Africa", latitude: -33.922953, longitude: 18.420893)
-c9.avatar = File.open('app/assets/images/seeds/siyelo.png')
+c9.avatar = File.open('app/assets/images/seeds/liquidthought.png')
 c9.save!
 
 c10 = Company.create(name: "Sea Monster", user_id: User.second.id, phone: "123-456-7890", size: 29, status: "Hiring", location: "80A Upper Maynard St, Cape Town,South Africa", latitude: -33.934285, longitude: 18.419491)

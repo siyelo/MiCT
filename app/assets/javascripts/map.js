@@ -59,7 +59,7 @@ function SetupMap() {
       itemName = marker.feature.properties.title +
         '' + marker.feature.properties.additional + '';
 
-      itemMarker = marker.feature.properties.title +
+      itemMarker = marker.feature.properties.window +
         '' + marker.feature.properties.description + '';
 
       info.append(
@@ -149,7 +149,7 @@ var placeMarkers = function(layer, data) {
     itemName = marker.feature.properties.title +
       '' + marker.feature.properties.additional + '';
 
-    itemMarker = marker.feature.properties.title +
+    itemMarker = marker.feature.properties.window +
       '' + marker.feature.properties.description + '';
 
     info.append(
